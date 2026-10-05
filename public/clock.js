@@ -31,6 +31,7 @@ let nextVideoRetry = 0, videoAttempts = 0, playPending = false, videoSeeks = 0, 
 let progressPhase = null, progressMono = 0, lastSeek = -Infinity, videoProgressed = false;
 let stallReported = false, recovering = false, output, debugUpdates = 0;
 let frameRequest = null, lastPresented = performance.now(), presentedTime = null, qualityFrames = null;
+let videoStarted = performance.now();
 let videoLoops = 0, videoLoopGapMs = null, videoMaxLoopGapMs = 0, videoNativeSeeks = 0;
 let lastVideoSeek = null;
 let upgrade = null, upgradeNextIndex = 0, videoUpgrades = 0, upgradeError = '';
@@ -46,9 +47,8 @@ let videoLoop = new VideoLoop(video, resetVideoState, wallNow, () => syncVideo(f
 
 function updateStartup() {
   if (stopped || presentation.shown) return;
-  const frameReady = typeof video.requestVideoFrameCallback === 'function'
-    ? presentedTime !== null && performance.now() - lastPresented < 250 && Math.abs(phaseError(presentedTime, phaseAt(wallNow()))) < 0.15
-    : videoProgressed;
+  const frameReady = (presentedTime !== null && performance.now() - lastPresented < 250 && Math.abs(phaseError(presentedTime, phaseAt(wallNow()))) < 0.15)
+    || (video.readyState >= 4 && videoProgressed);
   const videoReady = videoInitialized && video.readyState >= 3 && !video.paused && !video.seeking && frameReady && bufferedAhead(video) >= 1.5 && Math.abs(phaseError(video.currentTime, phaseAt(wallNow()))) < 0.12;
   const audioReady = !!audio.buffer || audio.status === 'unavailable' || audio.status === 'load-error';
   const prepared = startupEntries.filter(entry => images.has(entry.file)).length;
@@ -95,7 +95,7 @@ function selectVideo(index) {
   videoProgressed = false;
   if (frameRequest !== null && typeof video.cancelVideoFrameCallback === 'function') video.cancelVideoFrameCallback(frameRequest);
   frameRequest = null; presentedTime = null; stallReported = false;
-  videoLoop.load(selectedVideo); recovering = false;
+  videoStarted = performance.now(); videoLoop.load(selectedVideo, !presentation.shown && profileIndex > 0); recovering = false;
   syncVideo(true); playVideo();
 }
 async function loadMedia() {
@@ -244,6 +244,9 @@ function observePresentation() {
 function syncVideo(force = false) {
   if (stopped || !selectedVideo) return;
   const mono = performance.now();
+  if (presentedTime === null && !videoProgressed && videoLoop.mode === 'continuous' && mono - videoStarted > 8000) {
+    videoLoop.fallback(new Error('Slow media startup'), videoLoop.generation);
+  }
   videoLoop.maintain();
   observePresentation();
   if (video.error && profileIndex + 1 < profiles.length) {

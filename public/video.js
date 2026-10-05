@@ -10,10 +10,10 @@ export class VideoLoop {
     this.onReady = onReady;
     this.mode = 'native'; this.error = ''; this.generation = 0;
   }
-  load(profile) {
+  load(profile, nativeOnly = false) {
     this.dispose(); this.profile = profile; this.error = '';
     const Media = globalThis.MediaSource;
-    if (!profile.fragmented || !profile.segments?.length || !Media?.isTypeSupported(profile.mime)) return this.native();
+    if (nativeOnly || !profile.fragmented || !profile.segments?.length || !Media?.isTypeSupported(profile.mime)) return this.native();
     const generation = this.generation;
     try {
       this.mode = 'continuous'; this.source = new Media();
@@ -197,6 +197,9 @@ export class VideoUpgrade {
     clearTimeout(this.timer);
     if (this.stopped) return;
     if (performance.now() - this.started > 45000) { this.fail('Upgrade timeout'); return; }
+    if (!this.presented && this.loop.mode === 'continuous' && performance.now() - this.started > 8000) {
+      this.loop.fallback(new Error('Slow media startup'), this.loop.generation); this.started = performance.now();
+    }
     this.loop.maintain();
     if (!this.initialized) this.seek();
     if (this.stopped) return;
@@ -206,8 +209,9 @@ export class VideoUpgrade {
       const correction = videoCorrection(error);
       if (correction.seek) this.seek(); else video.playbackRate = correction.rate;
       const presented = this.presented && performance.now() - this.presented.mono < 250 && Math.abs(phaseError(this.presented.time, phaseAt(this.wallNow()))) < 0.12;
-      // Engines without frame callbacks must show actual timeline progress.
-      const progressed = typeof video.requestVideoFrameCallback !== 'function' && this.previousTime !== undefined && Math.abs(phaseError(video.currentTime, this.previousTime)) > 0.015;
+      // Covered decoders may suppress frame callbacks. Ready decoded data
+      // plus actual timeline progress is also sufficient for a safe handoff.
+      const progressed = video.readyState >= 4 && this.previousTime !== undefined && Math.abs(phaseError(video.currentTime, this.previousTime)) > 0.015;
       if (this.initialized && !video.paused && Math.abs(error) < 0.1 && bufferedAhead(video) >= 1.5 && (presented || progressed)) {
         this.detach(); this.ready(this); return;
       }
