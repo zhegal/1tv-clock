@@ -51,7 +51,7 @@ test('Pages build copies the complete static product without changing manifests'
   try {
     const source=join(temp,'public'), output=join(temp,'site');
     await cp(new URL('../public/',import.meta.url),source,{recursive:true});
-    assert.equal(await buildPages(source,output),557);
+    assert.equal(await buildPages(source,output),558);
     assert.equal(await readFile(join(output,'assets/media-manifest.json'),'utf8'),await readFile(join(source,'assets/media-manifest.json'),'utf8'));
     const inputFiles=(await readdir(source,{recursive:true})).sort();
     const outputFiles=(await readdir(output,{recursive:true})).filter(x=>x!=='.nojekyll').sort();

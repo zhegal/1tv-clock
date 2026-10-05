@@ -1,5 +1,6 @@
-import { statesAt, phaseAt, phaseError, videoCorrection, ClockMonitor } from './time.js';
+import { statesAt, phaseAt, phaseError, videoCorrection, ClockMonitor, modulo } from './time.js';
 import { LoopAudio } from './audio.js';
+import { VideoLoop } from './video.js';
 import { parseQuality, chooseQuality, assetURL, videoCandidates, audioCandidates } from './media.js';
 
 const query = new URLSearchParams(location.search);
@@ -26,7 +27,14 @@ let nextVideoRetry = 0, videoAttempts = 0, playPending = false, videoSeeks = 0, 
 let progressPhase = null, progressMono = 0, lastSeek = -Infinity;
 let stallReported = false, recovering = false, output, debugUpdates = 0;
 let frameRequest = null, lastPresented = performance.now(), presentedTime = null, qualityFrames = null;
+let videoLoops = 0, videoLoopGapMs = null, videoMaxLoopGapMs = 0, videoNativeSeeks = 0;
+let lastVideoSeek = null;
 const audio = new LoopAudio(mode, wallNow, () => { if (debug) updateDebug(); });
+const videoLoop = new VideoLoop(video, () => {
+  videoGeneration++; playPending = false; videoInitialized = false;
+  lastSeek = -Infinity; nextVideoRetry = 0; progressPhase = null;
+  progressMono = lastPresented = performance.now(); stallReported = false;
+}, wallNow, () => syncVideo(false));
 
 function selectVideo(index) {
   selectedVideo = profiles[index]; profileIndex = index;
@@ -35,7 +43,7 @@ function selectVideo(index) {
   nextVideoRetry = 0; progressPhase = null; progressMono = performance.now(); lastPresented = progressMono;
   if (frameRequest !== null && typeof video.cancelVideoFrameCallback === 'function') video.cancelVideoFrameCallback(frameRequest);
   frameRequest = null; presentedTime = null; stallReported = false;
-  video.src = assetURL(selectedVideo.file); video.load(); recovering = false;
+  videoLoop.load(selectedVideo); recovering = false;
   syncVideo(true); playVideo();
 }
 async function loadMedia() {
@@ -131,8 +139,15 @@ function seekVideo() {
   if (video.readyState < 1 || video.seeking || mono - lastSeek < 1500) return;
   try {
     // Measure now, not the time before loading/network recovery.
-    video.currentTime = phaseAt(wallNow()); video.playbackRate = 1;
-    lastSeek = mono; videoSeeks++; videoInitialized = true;
+    const target = videoLoop.seekTarget(phaseAt(wallNow()));
+    if (videoLoop.mode === 'continuous') {
+      const ranges = video.buffered;
+      if (!Array.from({ length: ranges.length }, (_, i) => target >= ranges.start(i) && target < ranges.end(i)).some(Boolean)) return;
+    }
+    video.currentTime = target; video.playbackRate = 1;
+    if (debug) lastVideoSeek = { target, actual: video.currentTime, ready: video.readyState };
+    lastSeek = mono; videoSeeks++;
+    videoInitialized = video.seeking || Math.abs(phaseError(video.currentTime, target)) < 0.06;
     progressPhase = null; progressMono = mono;
   } catch (error) { videoError = String(error); }
 }
@@ -141,9 +156,14 @@ function observePresentation() {
     if (frameRequest !== null) return;
     frameRequest = video.requestVideoFrameCallback((_, metadata) => {
       frameRequest = null;
+      if (debug && presentedTime !== null && modulo(presentedTime) > 59 && modulo(metadata.mediaTime) < 1) {
+        videoLoops++; videoLoopGapMs = Math.round(performance.now() - lastPresented);
+        videoMaxLoopGapMs = Math.max(videoMaxLoopGapMs, videoLoopGapMs);
+      }
       if (presentedTime === null || Math.abs(phaseError(metadata.mediaTime, presentedTime)) > 0.005) {
         presentedTime = metadata.mediaTime; lastPresented = performance.now();
       }
+      if (!stopped) observePresentation();
     });
   } else if (typeof video.getVideoPlaybackQuality === 'function') {
     const count = video.getVideoPlaybackQuality().totalVideoFrames;
@@ -157,15 +177,16 @@ function observePresentation() {
 function syncVideo(force = false) {
   if (stopped || !selectedVideo) return;
   const mono = performance.now();
+  videoLoop.maintain();
   observePresentation();
   if (video.error && profileIndex + 1 < profiles.length) {
     videoFallbacks++; videoFallbackReason = `${selectedVideo.name}: media error ${video.error.code}`;
     selectVideo(profileIndex + 1); return;
   }
-  if (video.error || (stallReported && mono - lastPresented > 8000)) {
+  if (video.error || (!videoLoop.loading && stallReported && mono - lastPresented > 8000)) {
     if (mono >= nextVideoRetry) {
       recovering = true; videoInitialized = false; playPending = false;
-      videoRetry(); video.load(); recovering = false; stallReported = false;
+      videoGeneration++; videoRetry(); videoLoop.load(selectedVideo); recovering = false; stallReported = false;
       progressPhase = null; progressMono = mono; lastPresented = mono;
       if (frameRequest !== null && typeof video.cancelVideoFrameCallback === 'function') video.cancelVideoFrameCallback(frameRequest);
       frameRequest = null; presentedTime = null;
@@ -173,7 +194,7 @@ function syncVideo(force = false) {
     return;
   }
   if (video.readyState < 1) {
-    if (mono - progressMono > 20000 && mono >= nextVideoRetry) { videoRetry(); video.load(); progressMono = mono; }
+    if (!videoLoop.loading && mono - progressMono > 20000 && mono >= nextVideoRetry) { videoGeneration++; playPending = false; videoRetry(); videoLoop.load(selectedVideo); progressMono = mono; }
     return;
   }
   if (!videoInitialized) seekVideo();
@@ -217,7 +238,7 @@ function schedule() {
 }
 function updateDebug() {
   if (!output) return;
-  const wall = wallNow(), ap = audio.phase(), vp = video.currentTime;
+  const wall = wallNow(), ap = audio.phase(), vp = modulo(video.currentTime);
   const data = {
     requestedQuality, selectedVideoProfile: selectedVideo?.name || null,
     videoResolution: selectedVideo ? `${selectedVideo.width}×${selectedVideo.height}` : null,
@@ -230,7 +251,10 @@ function updateDebug() {
     states: statesAt(wall), paintedStates: lastKey, decodedStates: decoded, assetError,
     expectedPhase: +phaseAt(wall).toFixed(3), videoPhase: +vp.toFixed(3), videoDriftMs: Math.round(phaseError(vp, phaseAt(wall)) * 1000),
     videoRate: +video.playbackRate.toFixed(4), videoReady: video.readyState, videoPaused: video.paused, videoSeeking: video.seeking,
-    videoSeeks, videoAutoplayBlocked, videoRetries: videoAttempts, videoError, lastPresentedMs: Math.round(lastPresented),
+    videoSeeks, videoNativeSeeks, videoLoops, videoLoopGapMs, videoMaxLoopGapMs,
+    videoLoopMode: videoLoop.mode, videoLoopError: videoLoop.error,
+    lastVideoSeek, videoBufferEnd: videoLoop.end, videoBufferLoading: videoLoop.loading,
+    videoAutoplayBlocked, videoRetries: videoAttempts, videoError, lastPresentedMs: Math.round(lastPresented),
     audioMode: mode, audioState: audio.context?.state || audio.status, audioPhase: ap === null ? null : +ap.toFixed(3),
     audioDriftMs: ap === null ? null : Math.round(phaseError(ap, phaseAt(wall)) * 1000), avDriftMs: ap === null ? null : Math.round(phaseError(ap, vp) * 1000),
     audioRate: audio.voice?.rate || null, audioStarts: audio.restarts, liveAudioVoices: audio.voices.size, audioError: audio.error,
@@ -240,7 +264,7 @@ function updateDebug() {
 }
 if (debug) {
   const panel = document.createElement('aside'); panel.id = 'debug';
-  const controls = [['Pause video', () => video.pause()], ['Suspend audio', () => audio.context?.suspend()], ['Video +5s', () => { video.currentTime = (video.currentTime + 5) % 60; }], ['Resync', recover]];
+  const controls = [['Pause video', () => video.pause()], ['Suspend audio', () => audio.context?.suspend()], ['Video +5s', () => { video.currentTime = videoLoop.seekTarget(modulo(video.currentTime + 5)); }], ['Resync', recover]];
   for (const [label, action] of controls) { const button = document.createElement('button'); button.textContent = label; button.addEventListener('click', action, { signal: events.signal }); panel.append(button); }
   output = document.createElement('pre'); output.id = 'diagnostics'; panel.append(output); document.body.append(panel);
 }
@@ -249,10 +273,15 @@ listen(video, 'loadedmetadata', () => { seekVideo(); playVideo(); });
 listen(video, 'canplay', () => { syncVideo(false); playVideo(); });
 listen(video, 'playing', () => { stallReported = false; progressMono = performance.now(); progressPhase = null; });
 listen(video, 'seeked', () => { if (video.paused) playVideo(); });
+listen(video, 'seeking', () => { videoNativeSeeks++; });
 listen(video, 'pause', () => { if (!recovering && !document.hidden) playVideo(); });
 listen(video, 'ended', () => { seekVideo(); playVideo(); });
 listen(video, 'stalled', () => { stallReported = true; });
-listen(video, 'error', () => { videoError = `Video error ${video.error?.code || 'unknown'}`; syncVideo(false); });
+listen(video, 'error', () => {
+  videoError = `Video error ${video.error?.code || 'unknown'}`;
+  if (videoLoop.mode === 'continuous') videoLoop.fallback(new Error(videoError), videoLoop.generation);
+  else syncVideo(false);
+});
 listen(document, 'visibilitychange', recover);
 listen(window, 'pageshow', recover);
 listen(window, 'focus', recover);
@@ -265,7 +294,7 @@ function unlockVideo() {
 for (const name of ['pointerdown', 'touchstart', 'keydown']) listen(window, name, unlockVideo);
 listen(window, 'pagehide', event => {
   if (event.persisted) return; // bfcache restores the same listeners/context.
-  stopped = true; clearTimeout(timer); events.abort(); audio.dispose(); images.clear();
+  stopped = true; clearTimeout(timer); events.abort(); audio.dispose(); videoLoop.dispose(); images.clear();
   if (frameRequest !== null && typeof video.cancelVideoFrameCallback === 'function') video.cancelVideoFrameCallback(frameRequest);
 });
 loadMedia(); loadAssets(); schedule(); updateDebug();
