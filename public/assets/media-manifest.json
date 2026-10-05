@@ -1,0 +1,92 @@
+{
+  "version": 1,
+  "loopSeconds": 60,
+  "video": {
+    "high": {
+      "file": "background-high.mp4",
+      "format": "h264",
+      "mime": "video/mp4; codecs=\"avc1.64002a\"",
+      "bytes": 57553081,
+      "duration": 60,
+      "bitrate": 7673744,
+      "width": 1440,
+      "height": 1080,
+      "fps": 50,
+      "frames": 3000
+    },
+    "medium": {
+      "file": "background-medium.mp4",
+      "format": "h264",
+      "mime": "video/mp4; codecs=\"avc1.640020\"",
+      "bytes": 23025104,
+      "duration": 60,
+      "bitrate": 3070013,
+      "width": 960,
+      "height": 720,
+      "fps": 50,
+      "frames": 3000
+    },
+    "low": {
+      "file": "background-low.mp4",
+      "format": "h264",
+      "mime": "video/mp4; codecs=\"avc1.64001f\"",
+      "bytes": 9978695,
+      "duration": 60,
+      "bitrate": 1330492,
+      "width": 640,
+      "height": 480,
+      "fps": 50,
+      "frames": 3000
+    }
+  },
+  "audio": {
+    "day": [
+      {
+        "file": "day.ogg",
+        "format": "opus",
+        "mime": "audio/ogg; codecs=\"opus\"",
+        "bytes": 1006775,
+        "duration": 60.0065,
+        "bitrate": 134222,
+        "sampleRate": 48000,
+        "channels": 2,
+        "decodedSeconds": 60
+      },
+      {
+        "file": "day.wav",
+        "format": "wav",
+        "mime": "audio/wav",
+        "bytes": 11520044,
+        "duration": 60,
+        "bitrate": 1536005,
+        "sampleRate": 48000,
+        "channels": 2,
+        "decodedSeconds": 60
+      }
+    ],
+    "night": [
+      {
+        "file": "night.ogg",
+        "format": "opus",
+        "mime": "audio/ogg; codecs=\"opus\"",
+        "bytes": 1093275,
+        "duration": 60.0065,
+        "bitrate": 145754,
+        "sampleRate": 48000,
+        "channels": 2,
+        "decodedSeconds": 60
+      },
+      {
+        "file": "night.wav",
+        "format": "wav",
+        "mime": "audio/wav",
+        "bytes": 11520044,
+        "duration": 60,
+        "bitrate": 1536005,
+        "sampleRate": 48000,
+        "channels": 2,
+        "decodedSeconds": 60
+      }
+    ]
+  }
+}

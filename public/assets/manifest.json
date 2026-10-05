@@ -1,0 +1,3793 @@
+{
+  "width": 1440,
+  "height": 1080,
+  "loopSeconds": 60,
+  "hands": {
+    "sec": [
+      {
+        "file": "hands/sec-000.png",
+        "x": 710,
+        "y": 238.125,
+        "width": 22,
+        "height": 358.125
+      },
+      {
+        "file": "hands/sec-001.png",
+        "x": 706,
+        "y": 240,
+        "width": 54,
+        "height": 356.25
+      },
+      {
+        "file": "hands/sec-002.png",
+        "x": 700,
+        "y": 243.75,
+        "width": 92,
+        "height": 352.5
+      },
+      {
+        "file": "hands/sec-003.png",
+        "x": 694,
+        "y": 253.125,
+        "width": 128,
+        "height": 341.25
+      },
+      {
+        "file": "hands/sec-004.png",
+        "x": 690,
+        "y": 262.5,
+        "width": 162,
+        "height": 330
+      },
+      {
+        "file": "hands/sec-005.png",
+        "x": 684,
+        "y": 277.5,
+        "width": 194,
+        "height": 313.125
+      },
+      {
+        "file": "hands/sec-006.png",
+        "x": 682,
+        "y": 294.375,
+        "width": 222,
+        "height": 294.375
+      },
+      {
+        "file": "hands/sec-007.png",
+        "x": 678,
+        "y": 313.125,
+        "width": 250,
+        "height": 273.75
+      },
+      {
+        "file": "hands/sec-008.png",
+        "x": 674,
+        "y": 335.625,
+        "width": 278,
+        "height": 247.5
+      },
+      {
+        "file": "hands/sec-009.png",
+        "x": 672,
+        "y": 360,
+        "width": 298,
+        "height": 219.375
+      },
+      {
+        "file": "hands/sec-010.png",
+        "x": 668,
+        "y": 386.25,
+        "width": 320,
+        "height": 189.375
+      },
+      {
+        "file": "hands/sec-011.png",
+        "x": 668,
+        "y": 412.5,
+        "width": 334,
+        "height": 157.5
+      },
+      {
+        "file": "hands/sec-012.png",
+        "x": 666,
+        "y": 442.5,
+        "width": 346,
+        "height": 123.75
+      },
+      {
+        "file": "hands/sec-013.png",
+        "x": 664,
+        "y": 472.5,
+        "width": 358,
+        "height": 88.125
+      },
+      {
+        "file": "hands/sec-014.png",
+        "x": 664,
+        "y": 502.5,
+        "width": 362,
+        "height": 52.5
+      },
+      {
+        "file": "hands/sec-015.png",
+        "x": 664,
+        "y": 530.625,
+        "width": 364,
+        "height": 20.625
+      },
+      {
+        "file": "hands/sec-016.png",
+        "x": 664,
+        "y": 526.875,
+        "width": 362,
+        "height": 52.5
+      },
+      {
+        "file": "hands/sec-017.png",
+        "x": 664,
+        "y": 521.25,
+        "width": 358,
+        "height": 88.125
+      },
+      {
+        "file": "hands/sec-018.png",
+        "x": 666,
+        "y": 515.625,
+        "width": 346,
+        "height": 123.75
+      },
+      {
+        "file": "hands/sec-019.png",
+        "x": 668,
+        "y": 511.875,
+        "width": 334,
+        "height": 157.5
+      },
+      {
+        "file": "hands/sec-020.png",
+        "x": 670,
+        "y": 506.25,
+        "width": 318,
+        "height": 189.375
+      },
+      {
+        "file": "hands/sec-021.png",
+        "x": 672,
+        "y": 502.5,
+        "width": 298,
+        "height": 219.375
+      },
+      {
+        "file": "hands/sec-022.png",
+        "x": 674,
+        "y": 498.75,
+        "width": 278,
+        "height": 247.5
+      },
+      {
+        "file": "hands/sec-023.png",
+        "x": 678,
+        "y": 495,
+        "width": 250,
+        "height": 273.75
+      },
+      {
+        "file": "hands/sec-024.png",
+        "x": 682,
+        "y": 493.125,
+        "width": 222,
+        "height": 294.375
+      },
+      {
+        "file": "hands/sec-025.png",
+        "x": 686,
+        "y": 489.375,
+        "width": 192,
+        "height": 315
+      },
+      {
+        "file": "hands/sec-026.png",
+        "x": 690,
+        "y": 489.375,
+        "width": 162,
+        "height": 330
+      },
+      {
+        "file": "hands/sec-027.png",
+        "x": 696,
+        "y": 487.5,
+        "width": 126,
+        "height": 341.25
+      },
+      {
+        "file": "hands/sec-028.png",
+        "x": 700,
+        "y": 485.625,
+        "width": 92,
+        "height": 352.5
+      },
+      {
+        "file": "hands/sec-029.png",
+        "x": 706,
+        "y": 485.625,
+        "width": 54,
+        "height": 356.25
+      },
+      {
+        "file": "hands/sec-030.png",
+        "x": 710,
+        "y": 485.625,
+        "width": 22,
+        "height": 358.125
+      },
+      {
+        "file": "hands/sec-031.png",
+        "x": 682,
+        "y": 485.625,
+        "width": 56,
+        "height": 356.25
+      },
+      {
+        "file": "hands/sec-032.png",
+        "x": 650,
+        "y": 485.625,
+        "width": 92,
+        "height": 352.5
+      },
+      {
+        "file": "hands/sec-033.png",
+        "x": 620,
+        "y": 487.5,
+        "width": 128,
+        "height": 343.125
+      },
+      {
+        "file": "hands/sec-034.png",
+        "x": 592,
+        "y": 487.5,
+        "width": 160,
+        "height": 331.875
+      },
+      {
+        "file": "hands/sec-035.png",
+        "x": 564,
+        "y": 491.25,
+        "width": 192,
+        "height": 313.125
+      },
+      {
+        "file": "hands/sec-036.png",
+        "x": 538,
+        "y": 493.125,
+        "width": 222,
+        "height": 294.375
+      },
+      {
+        "file": "hands/sec-037.png",
+        "x": 512,
+        "y": 495,
+        "width": 252,
+        "height": 273.75
+      },
+      {
+        "file": "hands/sec-038.png",
+        "x": 490,
+        "y": 498.75,
+        "width": 278,
+        "height": 247.5
+      },
+      {
+        "file": "hands/sec-039.png",
+        "x": 472,
+        "y": 502.5,
+        "width": 298,
+        "height": 219.375
+      },
+      {
+        "file": "hands/sec-040.png",
+        "x": 454,
+        "y": 506.25,
+        "width": 320,
+        "height": 189.375
+      },
+      {
+        "file": "hands/sec-041.png",
+        "x": 440,
+        "y": 511.875,
+        "width": 336,
+        "height": 157.5
+      },
+      {
+        "file": "hands/sec-042.png",
+        "x": 430,
+        "y": 515.625,
+        "width": 346,
+        "height": 123.75
+      },
+      {
+        "file": "hands/sec-043.png",
+        "x": 420,
+        "y": 521.25,
+        "width": 358,
+        "height": 88.125
+      },
+      {
+        "file": "hands/sec-044.png",
+        "x": 416,
+        "y": 526.875,
+        "width": 362,
+        "height": 52.5
+      },
+      {
+        "file": "hands/sec-045.png",
+        "x": 414,
+        "y": 530.625,
+        "width": 364,
+        "height": 20.625
+      },
+      {
+        "file": "hands/sec-046.png",
+        "x": 416,
+        "y": 502.5,
+        "width": 362,
+        "height": 52.5
+      },
+      {
+        "file": "hands/sec-047.png",
+        "x": 420,
+        "y": 472.5,
+        "width": 358,
+        "height": 88.125
+      },
+      {
+        "file": "hands/sec-048.png",
+        "x": 430,
+        "y": 442.5,
+        "width": 346,
+        "height": 123.75
+      },
+      {
+        "file": "hands/sec-049.png",
+        "x": 440,
+        "y": 414.375,
+        "width": 336,
+        "height": 155.625
+      },
+      {
+        "file": "hands/sec-050.png",
+        "x": 454,
+        "y": 386.25,
+        "width": 318,
+        "height": 189.375
+      },
+      {
+        "file": "hands/sec-051.png",
+        "x": 472,
+        "y": 360,
+        "width": 298,
+        "height": 219.375
+      },
+      {
+        "file": "hands/sec-052.png",
+        "x": 490,
+        "y": 335.625,
+        "width": 278,
+        "height": 247.5
+      },
+      {
+        "file": "hands/sec-053.png",
+        "x": 512,
+        "y": 313.125,
+        "width": 252,
+        "height": 273.75
+      },
+      {
+        "file": "hands/sec-054.png",
+        "x": 538,
+        "y": 294.375,
+        "width": 222,
+        "height": 294.375
+      },
+      {
+        "file": "hands/sec-055.png",
+        "x": 564,
+        "y": 277.5,
+        "width": 192,
+        "height": 315
+      },
+      {
+        "file": "hands/sec-056.png",
+        "x": 590,
+        "y": 262.5,
+        "width": 162,
+        "height": 331.875
+      },
+      {
+        "file": "hands/sec-057.png",
+        "x": 620,
+        "y": 253.125,
+        "width": 128,
+        "height": 341.25
+      },
+      {
+        "file": "hands/sec-058.png",
+        "x": 650,
+        "y": 243.75,
+        "width": 92,
+        "height": 352.5
+      },
+      {
+        "file": "hands/sec-059.png",
+        "x": 682,
+        "y": 240,
+        "width": 54,
+        "height": 356.25
+      }
+    ],
+    "min": [
+      {
+        "file": "hands/min-000.png",
+        "x": 706,
+        "y": 243.75,
+        "width": 30,
+        "height": 346.875
+      },
+      {
+        "file": "hands/min-001.png",
+        "x": 704,
+        "y": 243.75,
+        "width": 34,
+        "height": 346.875
+      },
+      {
+        "file": "hands/min-002.png",
+        "x": 704,
+        "y": 243.75,
+        "width": 42,
+        "height": 346.875
+      },
+      {
+        "file": "hands/min-003.png",
+        "x": 702,
+        "y": 243.75,
+        "width": 52,
+        "height": 346.875
+      },
+      {
+        "file": "hands/min-004.png",
+        "x": 700,
+        "y": 243.75,
+        "width": 62,
+        "height": 346.875
+      },
+      {
+        "file": "hands/min-005.png",
+        "x": 700,
+        "y": 245.625,
+        "width": 70,
+        "height": 345
+      },
+      {
+        "file": "hands/min-006.png",
+        "x": 698,
+        "y": 247.5,
+        "width": 78,
+        "height": 343.125
+      },
+      {
+        "file": "hands/min-007.png",
+        "x": 698,
+        "y": 247.5,
+        "width": 86,
+        "height": 343.125
+      },
+      {
+        "file": "hands/min-008.png",
+        "x": 696,
+        "y": 249.375,
+        "width": 94,
+        "height": 341.25
+      },
+      {
+        "file": "hands/min-009.png",
+        "x": 696,
+        "y": 251.25,
+        "width": 102,
+        "height": 339.375
+      },
+      {
+        "file": "hands/min-010.png",
+        "x": 694,
+        "y": 253.125,
+        "width": 112,
+        "height": 337.5
+      },
+      {
+        "file": "hands/min-011.png",
+        "x": 694,
+        "y": 255,
+        "width": 120,
+        "height": 335.625
+      },
+      {
+        "file": "hands/min-012.png",
+        "x": 692,
+        "y": 256.875,
+        "width": 128,
+        "height": 333.75
+      },
+      {
+        "file": "hands/min-013.png",
+        "x": 692,
+        "y": 258.75,
+        "width": 136,
+        "height": 331.875
+      },
+      {
+        "file": "hands/min-014.png",
+        "x": 690,
+        "y": 262.5,
+        "width": 146,
+        "height": 328.125
+      },
+      {
+        "file": "hands/min-015.png",
+        "x": 690,
+        "y": 264.375,
+        "width": 152,
+        "height": 326.25
+      },
+      {
+        "file": "hands/min-016.png",
+        "x": 688,
+        "y": 268.125,
+        "width": 162,
+        "height": 322.5
+      },
+      {
+        "file": "hands/min-017.png",
+        "x": 688,
+        "y": 270,
+        "width": 168,
+        "height": 318.75
+      },
+      {
+        "file": "hands/min-018.png",
+        "x": 686,
+        "y": 273.75,
+        "width": 176,
+        "height": 315
+      },
+      {
+        "file": "hands/min-019.png",
+        "x": 686,
+        "y": 277.5,
+        "width": 184,
+        "height": 311.25
+      },
+      {
+        "file": "hands/min-020.png",
+        "x": 684,
+        "y": 281.25,
+        "width": 192,
+        "height": 307.5
+      },
+      {
+        "file": "hands/min-021.png",
+        "x": 684,
+        "y": 285,
+        "width": 200,
+        "height": 303.75
+      },
+      {
+        "file": "hands/min-022.png",
+        "x": 684,
+        "y": 288.75,
+        "width": 204,
+        "height": 298.125
+      },
+      {
+        "file": "hands/min-023.png",
+        "x": 684,
+        "y": 292.5,
+        "width": 212,
+        "height": 294.375
+      },
+      {
+        "file": "hands/min-024.png",
+        "x": 682,
+        "y": 298.125,
+        "width": 220,
+        "height": 288.75
+      },
+      {
+        "file": "hands/min-025.png",
+        "x": 682,
+        "y": 301.875,
+        "width": 226,
+        "height": 285
+      },
+      {
+        "file": "hands/min-026.png",
+        "x": 680,
+        "y": 305.625,
+        "width": 234,
+        "height": 279.375
+      },
+      {
+        "file": "hands/min-027.png",
+        "x": 680,
+        "y": 311.25,
+        "width": 240,
+        "height": 273.75
+      },
+      {
+        "file": "hands/min-028.png",
+        "x": 680,
+        "y": 316.875,
+        "width": 246,
+        "height": 268.125
+      },
+      {
+        "file": "hands/min-029.png",
+        "x": 678,
+        "y": 320.625,
+        "width": 254,
+        "height": 262.5
+      },
+      {
+        "file": "hands/min-030.png",
+        "x": 678,
+        "y": 326.25,
+        "width": 258,
+        "height": 256.875
+      },
+      {
+        "file": "hands/min-031.png",
+        "x": 678,
+        "y": 331.875,
+        "width": 264,
+        "height": 251.25
+      },
+      {
+        "file": "hands/min-032.png",
+        "x": 676,
+        "y": 337.5,
+        "width": 272,
+        "height": 243.75
+      },
+      {
+        "file": "hands/min-033.png",
+        "x": 676,
+        "y": 343.125,
+        "width": 276,
+        "height": 238.125
+      },
+      {
+        "file": "hands/min-034.png",
+        "x": 676,
+        "y": 348.75,
+        "width": 280,
+        "height": 232.5
+      },
+      {
+        "file": "hands/min-035.png",
+        "x": 674,
+        "y": 354.375,
+        "width": 288,
+        "height": 225
+      },
+      {
+        "file": "hands/min-036.png",
+        "x": 674,
+        "y": 361.875,
+        "width": 292,
+        "height": 217.5
+      },
+      {
+        "file": "hands/min-037.png",
+        "x": 674,
+        "y": 367.5,
+        "width": 296,
+        "height": 210
+      },
+      {
+        "file": "hands/min-038.png",
+        "x": 674,
+        "y": 373.125,
+        "width": 300,
+        "height": 204.375
+      },
+      {
+        "file": "hands/min-039.png",
+        "x": 672,
+        "y": 380.625,
+        "width": 306,
+        "height": 195
+      },
+      {
+        "file": "hands/min-040.png",
+        "x": 672,
+        "y": 386.25,
+        "width": 310,
+        "height": 189.375
+      },
+      {
+        "file": "hands/min-041.png",
+        "x": 672,
+        "y": 393.75,
+        "width": 314,
+        "height": 181.875
+      },
+      {
+        "file": "hands/min-042.png",
+        "x": 672,
+        "y": 399.375,
+        "width": 318,
+        "height": 174.375
+      },
+      {
+        "file": "hands/min-043.png",
+        "x": 672,
+        "y": 406.875,
+        "width": 320,
+        "height": 166.875
+      },
+      {
+        "file": "hands/min-044.png",
+        "x": 670,
+        "y": 412.5,
+        "width": 326,
+        "height": 159.375
+      },
+      {
+        "file": "hands/min-045.png",
+        "x": 670,
+        "y": 420,
+        "width": 330,
+        "height": 151.875
+      },
+      {
+        "file": "hands/min-046.png",
+        "x": 670,
+        "y": 427.5,
+        "width": 332,
+        "height": 142.5
+      },
+      {
+        "file": "hands/min-047.png",
+        "x": 670,
+        "y": 435,
+        "width": 334,
+        "height": 133.125
+      },
+      {
+        "file": "hands/min-048.png",
+        "x": 670,
+        "y": 440.625,
+        "width": 338,
+        "height": 127.5
+      },
+      {
+        "file": "hands/min-049.png",
+        "x": 670,
+        "y": 448.125,
+        "width": 340,
+        "height": 118.125
+      },
+      {
+        "file": "hands/min-050.png",
+        "x": 670,
+        "y": 455.625,
+        "width": 342,
+        "height": 110.625
+      },
+      {
+        "file": "hands/min-051.png",
+        "x": 670,
+        "y": 463.125,
+        "width": 344,
+        "height": 101.25
+      },
+      {
+        "file": "hands/min-052.png",
+        "x": 670,
+        "y": 470.625,
+        "width": 344,
+        "height": 93.75
+      },
+      {
+        "file": "hands/min-053.png",
+        "x": 670,
+        "y": 478.125,
+        "width": 346,
+        "height": 84.375
+      },
+      {
+        "file": "hands/min-054.png",
+        "x": 670,
+        "y": 485.625,
+        "width": 346,
+        "height": 76.875
+      },
+      {
+        "file": "hands/min-055.png",
+        "x": 670,
+        "y": 493.125,
+        "width": 348,
+        "height": 67.5
+      },
+      {
+        "file": "hands/min-056.png",
+        "x": 670,
+        "y": 500.625,
+        "width": 350,
+        "height": 60
+      },
+      {
+        "file": "hands/min-057.png",
+        "x": 670,
+        "y": 508.125,
+        "width": 350,
+        "height": 50.625
+      },
+      {
+        "file": "hands/min-058.png",
+        "x": 670,
+        "y": 515.625,
+        "width": 350,
+        "height": 41.25
+      },
+      {
+        "file": "hands/min-059.png",
+        "x": 670,
+        "y": 523.125,
+        "width": 350,
+        "height": 33.75
+      },
+      {
+        "file": "hands/min-060.png",
+        "x": 670,
+        "y": 526.875,
+        "width": 350,
+        "height": 28.125
+      },
+      {
+        "file": "hands/min-061.png",
+        "x": 670,
+        "y": 525,
+        "width": 350,
+        "height": 31.875
+      },
+      {
+        "file": "hands/min-062.png",
+        "x": 670,
+        "y": 525,
+        "width": 350,
+        "height": 39.375
+      },
+      {
+        "file": "hands/min-063.png",
+        "x": 670,
+        "y": 523.125,
+        "width": 350,
+        "height": 48.75
+      },
+      {
+        "file": "hands/min-064.png",
+        "x": 670,
+        "y": 521.25,
+        "width": 350,
+        "height": 58.125
+      },
+      {
+        "file": "hands/min-065.png",
+        "x": 670,
+        "y": 521.25,
+        "width": 348,
+        "height": 65.625
+      },
+      {
+        "file": "hands/min-066.png",
+        "x": 670,
+        "y": 519.375,
+        "width": 348,
+        "height": 75
+      },
+      {
+        "file": "hands/min-067.png",
+        "x": 670,
+        "y": 519.375,
+        "width": 346,
+        "height": 82.5
+      },
+      {
+        "file": "hands/min-068.png",
+        "x": 670,
+        "y": 517.5,
+        "width": 344,
+        "height": 91.875
+      },
+      {
+        "file": "hands/min-069.png",
+        "x": 670,
+        "y": 517.5,
+        "width": 344,
+        "height": 99.375
+      },
+      {
+        "file": "hands/min-070.png",
+        "x": 670,
+        "y": 515.625,
+        "width": 342,
+        "height": 108.75
+      },
+      {
+        "file": "hands/min-071.png",
+        "x": 670,
+        "y": 515.625,
+        "width": 340,
+        "height": 116.25
+      },
+      {
+        "file": "hands/min-072.png",
+        "x": 670,
+        "y": 513.75,
+        "width": 338,
+        "height": 125.625
+      },
+      {
+        "file": "hands/min-073.png",
+        "x": 670,
+        "y": 511.875,
+        "width": 336,
+        "height": 135
+      },
+      {
+        "file": "hands/min-074.png",
+        "x": 670,
+        "y": 511.875,
+        "width": 332,
+        "height": 140.625
+      },
+      {
+        "file": "hands/min-075.png",
+        "x": 670,
+        "y": 510,
+        "width": 330,
+        "height": 150
+      },
+      {
+        "file": "hands/min-076.png",
+        "x": 670,
+        "y": 510,
+        "width": 328,
+        "height": 157.5
+      },
+      {
+        "file": "hands/min-077.png",
+        "x": 672,
+        "y": 508.125,
+        "width": 322,
+        "height": 165
+      },
+      {
+        "file": "hands/min-078.png",
+        "x": 672,
+        "y": 508.125,
+        "width": 318,
+        "height": 172.5
+      },
+      {
+        "file": "hands/min-079.png",
+        "x": 672,
+        "y": 506.25,
+        "width": 314,
+        "height": 181.875
+      },
+      {
+        "file": "hands/min-080.png",
+        "x": 672,
+        "y": 506.25,
+        "width": 310,
+        "height": 187.5
+      },
+      {
+        "file": "hands/min-081.png",
+        "x": 672,
+        "y": 506.25,
+        "width": 308,
+        "height": 195
+      },
+      {
+        "file": "hands/min-082.png",
+        "x": 674,
+        "y": 504.375,
+        "width": 302,
+        "height": 202.5
+      },
+      {
+        "file": "hands/min-083.png",
+        "x": 674,
+        "y": 504.375,
+        "width": 298,
+        "height": 208.125
+      },
+      {
+        "file": "hands/min-084.png",
+        "x": 674,
+        "y": 502.5,
+        "width": 292,
+        "height": 217.5
+      },
+      {
+        "file": "hands/min-085.png",
+        "x": 674,
+        "y": 502.5,
+        "width": 288,
+        "height": 223.125
+      },
+      {
+        "file": "hands/min-086.png",
+        "x": 676,
+        "y": 500.625,
+        "width": 282,
+        "height": 230.625
+      },
+      {
+        "file": "hands/min-087.png",
+        "x": 676,
+        "y": 500.625,
+        "width": 276,
+        "height": 236.25
+      },
+      {
+        "file": "hands/min-088.png",
+        "x": 676,
+        "y": 500.625,
+        "width": 272,
+        "height": 241.875
+      },
+      {
+        "file": "hands/min-089.png",
+        "x": 678,
+        "y": 498.75,
+        "width": 266,
+        "height": 249.375
+      },
+      {
+        "file": "hands/min-090.png",
+        "x": 678,
+        "y": 498.75,
+        "width": 260,
+        "height": 255
+      },
+      {
+        "file": "hands/min-091.png",
+        "x": 678,
+        "y": 498.75,
+        "width": 254,
+        "height": 260.625
+      },
+      {
+        "file": "hands/min-092.png",
+        "x": 680,
+        "y": 496.875,
+        "width": 246,
+        "height": 268.125
+      },
+      {
+        "file": "hands/min-093.png",
+        "x": 680,
+        "y": 496.875,
+        "width": 240,
+        "height": 271.875
+      },
+      {
+        "file": "hands/min-094.png",
+        "x": 680,
+        "y": 496.875,
+        "width": 236,
+        "height": 277.5
+      },
+      {
+        "file": "hands/min-095.png",
+        "x": 682,
+        "y": 495,
+        "width": 228,
+        "height": 283.125
+      },
+      {
+        "file": "hands/min-096.png",
+        "x": 682,
+        "y": 495,
+        "width": 222,
+        "height": 288.75
+      },
+      {
+        "file": "hands/min-097.png",
+        "x": 684,
+        "y": 495,
+        "width": 212,
+        "height": 292.5
+      },
+      {
+        "file": "hands/min-098.png",
+        "x": 684,
+        "y": 495,
+        "width": 206,
+        "height": 296.25
+      },
+      {
+        "file": "hands/min-099.png",
+        "x": 684,
+        "y": 493.125,
+        "width": 200,
+        "height": 303.75
+      },
+      {
+        "file": "hands/min-100.png",
+        "x": 686,
+        "y": 493.125,
+        "width": 192,
+        "height": 307.5
+      },
+      {
+        "file": "hands/min-101.png",
+        "x": 686,
+        "y": 493.125,
+        "width": 186,
+        "height": 311.25
+      },
+      {
+        "file": "hands/min-102.png",
+        "x": 686,
+        "y": 493.125,
+        "width": 178,
+        "height": 313.125
+      },
+      {
+        "file": "hands/min-103.png",
+        "x": 688,
+        "y": 493.125,
+        "width": 170,
+        "height": 316.875
+      },
+      {
+        "file": "hands/min-104.png",
+        "x": 688,
+        "y": 491.25,
+        "width": 164,
+        "height": 322.5
+      },
+      {
+        "file": "hands/min-105.png",
+        "x": 690,
+        "y": 491.25,
+        "width": 154,
+        "height": 324.375
+      },
+      {
+        "file": "hands/min-106.png",
+        "x": 690,
+        "y": 491.25,
+        "width": 146,
+        "height": 328.125
+      },
+      {
+        "file": "hands/min-107.png",
+        "x": 692,
+        "y": 491.25,
+        "width": 138,
+        "height": 330
+      },
+      {
+        "file": "hands/min-108.png",
+        "x": 692,
+        "y": 491.25,
+        "width": 130,
+        "height": 333.75
+      },
+      {
+        "file": "hands/min-109.png",
+        "x": 694,
+        "y": 491.25,
+        "width": 122,
+        "height": 335.625
+      },
+      {
+        "file": "hands/min-110.png",
+        "x": 694,
+        "y": 491.25,
+        "width": 114,
+        "height": 337.5
+      },
+      {
+        "file": "hands/min-111.png",
+        "x": 696,
+        "y": 491.25,
+        "width": 104,
+        "height": 339.375
+      },
+      {
+        "file": "hands/min-112.png",
+        "x": 696,
+        "y": 491.25,
+        "width": 96,
+        "height": 341.25
+      },
+      {
+        "file": "hands/min-113.png",
+        "x": 698,
+        "y": 491.25,
+        "width": 88,
+        "height": 343.125
+      },
+      {
+        "file": "hands/min-114.png",
+        "x": 698,
+        "y": 491.25,
+        "width": 80,
+        "height": 343.125
+      },
+      {
+        "file": "hands/min-115.png",
+        "x": 700,
+        "y": 491.25,
+        "width": 70,
+        "height": 345
+      },
+      {
+        "file": "hands/min-116.png",
+        "x": 700,
+        "y": 491.25,
+        "width": 62,
+        "height": 345
+      },
+      {
+        "file": "hands/min-117.png",
+        "x": 702,
+        "y": 491.25,
+        "width": 54,
+        "height": 346.875
+      },
+      {
+        "file": "hands/min-118.png",
+        "x": 704,
+        "y": 491.25,
+        "width": 44,
+        "height": 346.875
+      },
+      {
+        "file": "hands/min-119.png",
+        "x": 704,
+        "y": 491.25,
+        "width": 36,
+        "height": 346.875
+      },
+      {
+        "file": "hands/min-120.png",
+        "x": 706,
+        "y": 491.25,
+        "width": 30,
+        "height": 346.875
+      },
+      {
+        "file": "hands/min-121.png",
+        "x": 704,
+        "y": 491.25,
+        "width": 34,
+        "height": 346.875
+      },
+      {
+        "file": "hands/min-122.png",
+        "x": 696,
+        "y": 491.25,
+        "width": 42,
+        "height": 346.875
+      },
+      {
+        "file": "hands/min-123.png",
+        "x": 688,
+        "y": 491.25,
+        "width": 52,
+        "height": 346.875
+      },
+      {
+        "file": "hands/min-124.png",
+        "x": 682,
+        "y": 491.25,
+        "width": 58,
+        "height": 346.875
+      },
+      {
+        "file": "hands/min-125.png",
+        "x": 674,
+        "y": 491.25,
+        "width": 68,
+        "height": 345
+      },
+      {
+        "file": "hands/min-126.png",
+        "x": 666,
+        "y": 491.25,
+        "width": 78,
+        "height": 345
+      },
+      {
+        "file": "hands/min-127.png",
+        "x": 658,
+        "y": 491.25,
+        "width": 86,
+        "height": 343.125
+      },
+      {
+        "file": "hands/min-128.png",
+        "x": 652,
+        "y": 491.25,
+        "width": 94,
+        "height": 341.25
+      },
+      {
+        "file": "hands/min-129.png",
+        "x": 644,
+        "y": 491.25,
+        "width": 102,
+        "height": 339.375
+      },
+      {
+        "file": "hands/min-130.png",
+        "x": 636,
+        "y": 491.25,
+        "width": 112,
+        "height": 337.5
+      },
+      {
+        "file": "hands/min-131.png",
+        "x": 630,
+        "y": 491.25,
+        "width": 118,
+        "height": 335.625
+      },
+      {
+        "file": "hands/min-132.png",
+        "x": 622,
+        "y": 491.25,
+        "width": 128,
+        "height": 333.75
+      },
+      {
+        "file": "hands/min-133.png",
+        "x": 616,
+        "y": 491.25,
+        "width": 134,
+        "height": 331.875
+      },
+      {
+        "file": "hands/min-134.png",
+        "x": 608,
+        "y": 491.25,
+        "width": 144,
+        "height": 330
+      },
+      {
+        "file": "hands/min-135.png",
+        "x": 600,
+        "y": 491.25,
+        "width": 152,
+        "height": 326.25
+      },
+      {
+        "file": "hands/min-136.png",
+        "x": 594,
+        "y": 491.25,
+        "width": 160,
+        "height": 322.5
+      },
+      {
+        "file": "hands/min-137.png",
+        "x": 588,
+        "y": 493.125,
+        "width": 166,
+        "height": 318.75
+      },
+      {
+        "file": "hands/min-138.png",
+        "x": 580,
+        "y": 493.125,
+        "width": 176,
+        "height": 315
+      },
+      {
+        "file": "hands/min-139.png",
+        "x": 574,
+        "y": 493.125,
+        "width": 182,
+        "height": 311.25
+      },
+      {
+        "file": "hands/min-140.png",
+        "x": 566,
+        "y": 493.125,
+        "width": 190,
+        "height": 307.5
+      },
+      {
+        "file": "hands/min-141.png",
+        "x": 560,
+        "y": 493.125,
+        "width": 196,
+        "height": 303.75
+      },
+      {
+        "file": "hands/min-142.png",
+        "x": 554,
+        "y": 495,
+        "width": 204,
+        "height": 298.125
+      },
+      {
+        "file": "hands/min-143.png",
+        "x": 548,
+        "y": 495,
+        "width": 210,
+        "height": 294.375
+      },
+      {
+        "file": "hands/min-144.png",
+        "x": 542,
+        "y": 495,
+        "width": 218,
+        "height": 290.625
+      },
+      {
+        "file": "hands/min-145.png",
+        "x": 534,
+        "y": 495,
+        "width": 226,
+        "height": 285
+      },
+      {
+        "file": "hands/min-146.png",
+        "x": 528,
+        "y": 496.875,
+        "width": 234,
+        "height": 279.375
+      },
+      {
+        "file": "hands/min-147.png",
+        "x": 524,
+        "y": 496.875,
+        "width": 238,
+        "height": 273.75
+      },
+      {
+        "file": "hands/min-148.png",
+        "x": 518,
+        "y": 496.875,
+        "width": 244,
+        "height": 270
+      },
+      {
+        "file": "hands/min-149.png",
+        "x": 512,
+        "y": 498.75,
+        "width": 252,
+        "height": 262.5
+      },
+      {
+        "file": "hands/min-150.png",
+        "x": 506,
+        "y": 498.75,
+        "width": 258,
+        "height": 256.875
+      },
+      {
+        "file": "hands/min-151.png",
+        "x": 500,
+        "y": 498.75,
+        "width": 264,
+        "height": 251.25
+      },
+      {
+        "file": "hands/min-152.png",
+        "x": 496,
+        "y": 500.625,
+        "width": 270,
+        "height": 243.75
+      },
+      {
+        "file": "hands/min-153.png",
+        "x": 490,
+        "y": 500.625,
+        "width": 276,
+        "height": 238.125
+      },
+      {
+        "file": "hands/min-154.png",
+        "x": 486,
+        "y": 500.625,
+        "width": 280,
+        "height": 232.5
+      },
+      {
+        "file": "hands/min-155.png",
+        "x": 482,
+        "y": 502.5,
+        "width": 286,
+        "height": 225
+      },
+      {
+        "file": "hands/min-156.png",
+        "x": 476,
+        "y": 502.5,
+        "width": 292,
+        "height": 219.375
+      },
+      {
+        "file": "hands/min-157.png",
+        "x": 472,
+        "y": 504.375,
+        "width": 296,
+        "height": 211.875
+      },
+      {
+        "file": "hands/min-158.png",
+        "x": 468,
+        "y": 504.375,
+        "width": 300,
+        "height": 204.375
+      },
+      {
+        "file": "hands/min-159.png",
+        "x": 464,
+        "y": 506.25,
+        "width": 306,
+        "height": 196.875
+      },
+      {
+        "file": "hands/min-160.png",
+        "x": 460,
+        "y": 506.25,
+        "width": 310,
+        "height": 189.375
+      },
+      {
+        "file": "hands/min-161.png",
+        "x": 458,
+        "y": 506.25,
+        "width": 312,
+        "height": 183.75
+      },
+      {
+        "file": "hands/min-162.png",
+        "x": 454,
+        "y": 508.125,
+        "width": 316,
+        "height": 174.375
+      },
+      {
+        "file": "hands/min-163.png",
+        "x": 450,
+        "y": 508.125,
+        "width": 320,
+        "height": 168.75
+      },
+      {
+        "file": "hands/min-164.png",
+        "x": 446,
+        "y": 510,
+        "width": 326,
+        "height": 159.375
+      },
+      {
+        "file": "hands/min-165.png",
+        "x": 444,
+        "y": 510,
+        "width": 328,
+        "height": 151.875
+      },
+      {
+        "file": "hands/min-166.png",
+        "x": 440,
+        "y": 511.875,
+        "width": 332,
+        "height": 144.375
+      },
+      {
+        "file": "hands/min-167.png",
+        "x": 438,
+        "y": 511.875,
+        "width": 334,
+        "height": 136.875
+      },
+      {
+        "file": "hands/min-168.png",
+        "x": 434,
+        "y": 513.75,
+        "width": 338,
+        "height": 127.5
+      },
+      {
+        "file": "hands/min-169.png",
+        "x": 432,
+        "y": 515.625,
+        "width": 340,
+        "height": 118.125
+      },
+      {
+        "file": "hands/min-170.png",
+        "x": 430,
+        "y": 515.625,
+        "width": 342,
+        "height": 110.625
+      },
+      {
+        "file": "hands/min-171.png",
+        "x": 428,
+        "y": 517.5,
+        "width": 344,
+        "height": 101.25
+      },
+      {
+        "file": "hands/min-172.png",
+        "x": 428,
+        "y": 517.5,
+        "width": 344,
+        "height": 95.625
+      },
+      {
+        "file": "hands/min-173.png",
+        "x": 426,
+        "y": 519.375,
+        "width": 346,
+        "height": 86.25
+      },
+      {
+        "file": "hands/min-174.png",
+        "x": 424,
+        "y": 519.375,
+        "width": 348,
+        "height": 78.75
+      },
+      {
+        "file": "hands/min-175.png",
+        "x": 424,
+        "y": 521.25,
+        "width": 348,
+        "height": 69.375
+      },
+      {
+        "file": "hands/min-176.png",
+        "x": 424,
+        "y": 521.25,
+        "width": 348,
+        "height": 61.875
+      },
+      {
+        "file": "hands/min-177.png",
+        "x": 422,
+        "y": 523.125,
+        "width": 350,
+        "height": 52.5
+      },
+      {
+        "file": "hands/min-178.png",
+        "x": 422,
+        "y": 525,
+        "width": 350,
+        "height": 43.125
+      },
+      {
+        "file": "hands/min-179.png",
+        "x": 422,
+        "y": 525,
+        "width": 350,
+        "height": 35.625
+      },
+      {
+        "file": "hands/min-180.png",
+        "x": 422,
+        "y": 526.875,
+        "width": 350,
+        "height": 28.125
+      },
+      {
+        "file": "hands/min-181.png",
+        "x": 422,
+        "y": 526.875,
+        "width": 350,
+        "height": 30
+      },
+      {
+        "file": "hands/min-182.png",
+        "x": 422,
+        "y": 519.375,
+        "width": 350,
+        "height": 37.5
+      },
+      {
+        "file": "hands/min-183.png",
+        "x": 422,
+        "y": 510,
+        "width": 350,
+        "height": 48.75
+      },
+      {
+        "file": "hands/min-184.png",
+        "x": 422,
+        "y": 502.5,
+        "width": 350,
+        "height": 58.125
+      },
+      {
+        "file": "hands/min-185.png",
+        "x": 424,
+        "y": 495,
+        "width": 348,
+        "height": 65.625
+      },
+      {
+        "file": "hands/min-186.png",
+        "x": 424,
+        "y": 487.5,
+        "width": 348,
+        "height": 75
+      },
+      {
+        "file": "hands/min-187.png",
+        "x": 426,
+        "y": 480,
+        "width": 346,
+        "height": 82.5
+      },
+      {
+        "file": "hands/min-188.png",
+        "x": 426,
+        "y": 472.5,
+        "width": 346,
+        "height": 91.875
+      },
+      {
+        "file": "hands/min-189.png",
+        "x": 428,
+        "y": 466.875,
+        "width": 344,
+        "height": 97.5
+      },
+      {
+        "file": "hands/min-190.png",
+        "x": 430,
+        "y": 459.375,
+        "width": 342,
+        "height": 106.875
+      },
+      {
+        "file": "hands/min-191.png",
+        "x": 432,
+        "y": 451.875,
+        "width": 340,
+        "height": 114.375
+      },
+      {
+        "file": "hands/min-192.png",
+        "x": 434,
+        "y": 444.375,
+        "width": 338,
+        "height": 123.75
+      },
+      {
+        "file": "hands/min-193.png",
+        "x": 436,
+        "y": 436.875,
+        "width": 336,
+        "height": 131.25
+      },
+      {
+        "file": "hands/min-194.png",
+        "x": 438,
+        "y": 429.375,
+        "width": 334,
+        "height": 140.625
+      },
+      {
+        "file": "hands/min-195.png",
+        "x": 442,
+        "y": 421.875,
+        "width": 330,
+        "height": 148.125
+      },
+      {
+        "file": "hands/min-196.png",
+        "x": 444,
+        "y": 416.25,
+        "width": 328,
+        "height": 155.625
+      },
+      {
+        "file": "hands/min-197.png",
+        "x": 448,
+        "y": 408.75,
+        "width": 322,
+        "height": 165
+      },
+      {
+        "file": "hands/min-198.png",
+        "x": 452,
+        "y": 401.25,
+        "width": 318,
+        "height": 172.5
+      },
+      {
+        "file": "hands/min-199.png",
+        "x": 456,
+        "y": 395.625,
+        "width": 314,
+        "height": 178.125
+      },
+      {
+        "file": "hands/min-200.png",
+        "x": 458,
+        "y": 388.125,
+        "width": 312,
+        "height": 187.5
+      },
+      {
+        "file": "hands/min-201.png",
+        "x": 462,
+        "y": 382.5,
+        "width": 308,
+        "height": 193.125
+      },
+      {
+        "file": "hands/min-202.png",
+        "x": 466,
+        "y": 375,
+        "width": 304,
+        "height": 202.5
+      },
+      {
+        "file": "hands/min-203.png",
+        "x": 470,
+        "y": 369.375,
+        "width": 298,
+        "height": 208.125
+      },
+      {
+        "file": "hands/min-204.png",
+        "x": 474,
+        "y": 363.75,
+        "width": 294,
+        "height": 215.625
+      },
+      {
+        "file": "hands/min-205.png",
+        "x": 478,
+        "y": 356.25,
+        "width": 290,
+        "height": 223.125
+      },
+      {
+        "file": "hands/min-206.png",
+        "x": 484,
+        "y": 350.625,
+        "width": 282,
+        "height": 230.625
+      },
+      {
+        "file": "hands/min-207.png",
+        "x": 488,
+        "y": 345,
+        "width": 278,
+        "height": 236.25
+      },
+      {
+        "file": "hands/min-208.png",
+        "x": 492,
+        "y": 339.375,
+        "width": 274,
+        "height": 241.875
+      },
+      {
+        "file": "hands/min-209.png",
+        "x": 498,
+        "y": 333.75,
+        "width": 266,
+        "height": 249.375
+      },
+      {
+        "file": "hands/min-210.png",
+        "x": 504,
+        "y": 328.125,
+        "width": 260,
+        "height": 255
+      },
+      {
+        "file": "hands/min-211.png",
+        "x": 508,
+        "y": 322.5,
+        "width": 256,
+        "height": 260.625
+      },
+      {
+        "file": "hands/min-212.png",
+        "x": 514,
+        "y": 318.75,
+        "width": 248,
+        "height": 266.25
+      },
+      {
+        "file": "hands/min-213.png",
+        "x": 520,
+        "y": 313.125,
+        "width": 242,
+        "height": 271.875
+      },
+      {
+        "file": "hands/min-214.png",
+        "x": 526,
+        "y": 307.5,
+        "width": 236,
+        "height": 277.5
+      },
+      {
+        "file": "hands/min-215.png",
+        "x": 532,
+        "y": 303.75,
+        "width": 228,
+        "height": 283.125
+      },
+      {
+        "file": "hands/min-216.png",
+        "x": 538,
+        "y": 298.125,
+        "width": 222,
+        "height": 288.75
+      },
+      {
+        "file": "hands/min-217.png",
+        "x": 544,
+        "y": 294.375,
+        "width": 214,
+        "height": 292.5
+      },
+      {
+        "file": "hands/min-218.png",
+        "x": 550,
+        "y": 290.625,
+        "width": 208,
+        "height": 296.25
+      },
+      {
+        "file": "hands/min-219.png",
+        "x": 556,
+        "y": 286.875,
+        "width": 202,
+        "height": 301.875
+      },
+      {
+        "file": "hands/min-220.png",
+        "x": 562,
+        "y": 283.125,
+        "width": 194,
+        "height": 305.625
+      },
+      {
+        "file": "hands/min-221.png",
+        "x": 570,
+        "y": 279.375,
+        "width": 186,
+        "height": 309.375
+      },
+      {
+        "file": "hands/min-222.png",
+        "x": 576,
+        "y": 275.625,
+        "width": 180,
+        "height": 313.125
+      },
+      {
+        "file": "hands/min-223.png",
+        "x": 584,
+        "y": 271.875,
+        "width": 170,
+        "height": 316.875
+      },
+      {
+        "file": "hands/min-224.png",
+        "x": 590,
+        "y": 268.125,
+        "width": 164,
+        "height": 322.5
+      },
+      {
+        "file": "hands/min-225.png",
+        "x": 596,
+        "y": 266.25,
+        "width": 156,
+        "height": 324.375
+      },
+      {
+        "file": "hands/min-226.png",
+        "x": 604,
+        "y": 262.5,
+        "width": 148,
+        "height": 328.125
+      },
+      {
+        "file": "hands/min-227.png",
+        "x": 612,
+        "y": 260.625,
+        "width": 138,
+        "height": 330
+      },
+      {
+        "file": "hands/min-228.png",
+        "x": 618,
+        "y": 256.875,
+        "width": 132,
+        "height": 333.75
+      },
+      {
+        "file": "hands/min-229.png",
+        "x": 626,
+        "y": 255,
+        "width": 122,
+        "height": 335.625
+      },
+      {
+        "file": "hands/min-230.png",
+        "x": 632,
+        "y": 253.125,
+        "width": 116,
+        "height": 337.5
+      },
+      {
+        "file": "hands/min-231.png",
+        "x": 640,
+        "y": 251.25,
+        "width": 106,
+        "height": 339.375
+      },
+      {
+        "file": "hands/min-232.png",
+        "x": 648,
+        "y": 249.375,
+        "width": 98,
+        "height": 341.25
+      },
+      {
+        "file": "hands/min-233.png",
+        "x": 654,
+        "y": 247.5,
+        "width": 90,
+        "height": 343.125
+      },
+      {
+        "file": "hands/min-234.png",
+        "x": 662,
+        "y": 247.5,
+        "width": 82,
+        "height": 343.125
+      },
+      {
+        "file": "hands/min-235.png",
+        "x": 670,
+        "y": 245.625,
+        "width": 72,
+        "height": 345
+      },
+      {
+        "file": "hands/min-236.png",
+        "x": 678,
+        "y": 245.625,
+        "width": 64,
+        "height": 345
+      },
+      {
+        "file": "hands/min-237.png",
+        "x": 684,
+        "y": 243.75,
+        "width": 56,
+        "height": 346.875
+      },
+      {
+        "file": "hands/min-238.png",
+        "x": 692,
+        "y": 243.75,
+        "width": 48,
+        "height": 346.875
+      },
+      {
+        "file": "hands/min-239.png",
+        "x": 700,
+        "y": 243.75,
+        "width": 38,
+        "height": 346.875
+      }
+    ],
+    "hour": [
+      {
+        "file": "hands/hour-000.png",
+        "x": 700,
+        "y": 285,
+        "width": 40,
+        "height": 283.125
+      },
+      {
+        "file": "hands/hour-001.png",
+        "x": 700,
+        "y": 285,
+        "width": 40,
+        "height": 283.125
+      },
+      {
+        "file": "hands/hour-002.png",
+        "x": 700,
+        "y": 285,
+        "width": 48,
+        "height": 283.125
+      },
+      {
+        "file": "hands/hour-003.png",
+        "x": 700,
+        "y": 285,
+        "width": 54,
+        "height": 285
+      },
+      {
+        "file": "hands/hour-004.png",
+        "x": 698,
+        "y": 286.875,
+        "width": 64,
+        "height": 283.125
+      },
+      {
+        "file": "hands/hour-005.png",
+        "x": 698,
+        "y": 286.875,
+        "width": 70,
+        "height": 283.125
+      },
+      {
+        "file": "hands/hour-006.png",
+        "x": 698,
+        "y": 286.875,
+        "width": 78,
+        "height": 283.125
+      },
+      {
+        "file": "hands/hour-007.png",
+        "x": 698,
+        "y": 288.75,
+        "width": 84,
+        "height": 281.25
+      },
+      {
+        "file": "hands/hour-008.png",
+        "x": 696,
+        "y": 290.625,
+        "width": 92,
+        "height": 279.375
+      },
+      {
+        "file": "hands/hour-009.png",
+        "x": 696,
+        "y": 290.625,
+        "width": 100,
+        "height": 279.375
+      },
+      {
+        "file": "hands/hour-010.png",
+        "x": 696,
+        "y": 292.5,
+        "width": 106,
+        "height": 277.5
+      },
+      {
+        "file": "hands/hour-011.png",
+        "x": 696,
+        "y": 294.375,
+        "width": 112,
+        "height": 275.625
+      },
+      {
+        "file": "hands/hour-012.png",
+        "x": 696,
+        "y": 296.25,
+        "width": 120,
+        "height": 273.75
+      },
+      {
+        "file": "hands/hour-013.png",
+        "x": 694,
+        "y": 298.125,
+        "width": 128,
+        "height": 271.875
+      },
+      {
+        "file": "hands/hour-014.png",
+        "x": 694,
+        "y": 300,
+        "width": 134,
+        "height": 270
+      },
+      {
+        "file": "hands/hour-015.png",
+        "x": 694,
+        "y": 301.875,
+        "width": 140,
+        "height": 268.125
+      },
+      {
+        "file": "hands/hour-016.png",
+        "x": 694,
+        "y": 305.625,
+        "width": 146,
+        "height": 266.25
+      },
+      {
+        "file": "hands/hour-017.png",
+        "x": 694,
+        "y": 307.5,
+        "width": 152,
+        "height": 264.375
+      },
+      {
+        "file": "hands/hour-018.png",
+        "x": 692,
+        "y": 309.375,
+        "width": 162,
+        "height": 262.5
+      },
+      {
+        "file": "hands/hour-019.png",
+        "x": 692,
+        "y": 313.125,
+        "width": 168,
+        "height": 258.75
+      },
+      {
+        "file": "hands/hour-020.png",
+        "x": 692,
+        "y": 316.875,
+        "width": 174,
+        "height": 255
+      },
+      {
+        "file": "hands/hour-021.png",
+        "x": 692,
+        "y": 318.75,
+        "width": 180,
+        "height": 253.125
+      },
+      {
+        "file": "hands/hour-022.png",
+        "x": 692,
+        "y": 322.5,
+        "width": 184,
+        "height": 249.375
+      },
+      {
+        "file": "hands/hour-023.png",
+        "x": 692,
+        "y": 326.25,
+        "width": 190,
+        "height": 245.625
+      },
+      {
+        "file": "hands/hour-024.png",
+        "x": 690,
+        "y": 330,
+        "width": 198,
+        "height": 240
+      },
+      {
+        "file": "hands/hour-025.png",
+        "x": 690,
+        "y": 333.75,
+        "width": 204,
+        "height": 236.25
+      },
+      {
+        "file": "hands/hour-026.png",
+        "x": 690,
+        "y": 337.5,
+        "width": 210,
+        "height": 232.5
+      },
+      {
+        "file": "hands/hour-027.png",
+        "x": 690,
+        "y": 341.25,
+        "width": 214,
+        "height": 228.75
+      },
+      {
+        "file": "hands/hour-028.png",
+        "x": 690,
+        "y": 345,
+        "width": 220,
+        "height": 225
+      },
+      {
+        "file": "hands/hour-029.png",
+        "x": 690,
+        "y": 350.625,
+        "width": 224,
+        "height": 219.375
+      },
+      {
+        "file": "hands/hour-030.png",
+        "x": 690,
+        "y": 354.375,
+        "width": 230,
+        "height": 215.625
+      },
+      {
+        "file": "hands/hour-031.png",
+        "x": 690,
+        "y": 358.125,
+        "width": 234,
+        "height": 211.875
+      },
+      {
+        "file": "hands/hour-032.png",
+        "x": 690,
+        "y": 363.75,
+        "width": 238,
+        "height": 206.25
+      },
+      {
+        "file": "hands/hour-033.png",
+        "x": 690,
+        "y": 369.375,
+        "width": 244,
+        "height": 200.625
+      },
+      {
+        "file": "hands/hour-034.png",
+        "x": 690,
+        "y": 373.125,
+        "width": 248,
+        "height": 196.875
+      },
+      {
+        "file": "hands/hour-035.png",
+        "x": 690,
+        "y": 378.75,
+        "width": 252,
+        "height": 191.25
+      },
+      {
+        "file": "hands/hour-036.png",
+        "x": 688,
+        "y": 384.375,
+        "width": 258,
+        "height": 183.75
+      },
+      {
+        "file": "hands/hour-037.png",
+        "x": 688,
+        "y": 388.125,
+        "width": 262,
+        "height": 180
+      },
+      {
+        "file": "hands/hour-038.png",
+        "x": 688,
+        "y": 393.75,
+        "width": 266,
+        "height": 174.375
+      },
+      {
+        "file": "hands/hour-039.png",
+        "x": 688,
+        "y": 399.375,
+        "width": 270,
+        "height": 168.75
+      },
+      {
+        "file": "hands/hour-040.png",
+        "x": 688,
+        "y": 405,
+        "width": 272,
+        "height": 163.125
+      },
+      {
+        "file": "hands/hour-041.png",
+        "x": 688,
+        "y": 410.625,
+        "width": 276,
+        "height": 157.5
+      },
+      {
+        "file": "hands/hour-042.png",
+        "x": 688,
+        "y": 416.25,
+        "width": 278,
+        "height": 151.875
+      },
+      {
+        "file": "hands/hour-043.png",
+        "x": 688,
+        "y": 421.875,
+        "width": 282,
+        "height": 144.375
+      },
+      {
+        "file": "hands/hour-044.png",
+        "x": 688,
+        "y": 427.5,
+        "width": 284,
+        "height": 138.75
+      },
+      {
+        "file": "hands/hour-045.png",
+        "x": 690,
+        "y": 433.125,
+        "width": 286,
+        "height": 133.125
+      },
+      {
+        "file": "hands/hour-046.png",
+        "x": 688,
+        "y": 440.625,
+        "width": 290,
+        "height": 125.625
+      },
+      {
+        "file": "hands/hour-047.png",
+        "x": 690,
+        "y": 446.25,
+        "width": 290,
+        "height": 120
+      },
+      {
+        "file": "hands/hour-048.png",
+        "x": 690,
+        "y": 451.875,
+        "width": 292,
+        "height": 112.5
+      },
+      {
+        "file": "hands/hour-049.png",
+        "x": 690,
+        "y": 457.5,
+        "width": 294,
+        "height": 106.875
+      },
+      {
+        "file": "hands/hour-050.png",
+        "x": 690,
+        "y": 465,
+        "width": 296,
+        "height": 99.375
+      },
+      {
+        "file": "hands/hour-051.png",
+        "x": 690,
+        "y": 470.625,
+        "width": 298,
+        "height": 93.75
+      },
+      {
+        "file": "hands/hour-052.png",
+        "x": 690,
+        "y": 476.25,
+        "width": 298,
+        "height": 86.25
+      },
+      {
+        "file": "hands/hour-053.png",
+        "x": 690,
+        "y": 483.75,
+        "width": 300,
+        "height": 78.75
+      },
+      {
+        "file": "hands/hour-054.png",
+        "x": 690,
+        "y": 489.375,
+        "width": 302,
+        "height": 73.125
+      },
+      {
+        "file": "hands/hour-055.png",
+        "x": 690,
+        "y": 495,
+        "width": 302,
+        "height": 67.5
+      },
+      {
+        "file": "hands/hour-056.png",
+        "x": 690,
+        "y": 502.5,
+        "width": 302,
+        "height": 58.125
+      },
+      {
+        "file": "hands/hour-057.png",
+        "x": 690,
+        "y": 508.125,
+        "width": 304,
+        "height": 52.5
+      },
+      {
+        "file": "hands/hour-058.png",
+        "x": 692,
+        "y": 515.625,
+        "width": 302,
+        "height": 45
+      },
+      {
+        "file": "hands/hour-059.png",
+        "x": 692,
+        "y": 521.25,
+        "width": 302,
+        "height": 39.375
+      },
+      {
+        "file": "hands/hour-060.png",
+        "x": 692,
+        "y": 521.25,
+        "width": 302,
+        "height": 37.5
+      },
+      {
+        "file": "hands/hour-061.png",
+        "x": 692,
+        "y": 521.25,
+        "width": 302,
+        "height": 37.5
+      },
+      {
+        "file": "hands/hour-062.png",
+        "x": 692,
+        "y": 521.25,
+        "width": 302,
+        "height": 43.125
+      },
+      {
+        "file": "hands/hour-063.png",
+        "x": 692,
+        "y": 521.25,
+        "width": 302,
+        "height": 50.625
+      },
+      {
+        "file": "hands/hour-064.png",
+        "x": 690,
+        "y": 519.375,
+        "width": 302,
+        "height": 58.125
+      },
+      {
+        "file": "hands/hour-065.png",
+        "x": 690,
+        "y": 519.375,
+        "width": 302,
+        "height": 65.625
+      },
+      {
+        "file": "hands/hour-066.png",
+        "x": 690,
+        "y": 519.375,
+        "width": 302,
+        "height": 71.25
+      },
+      {
+        "file": "hands/hour-067.png",
+        "x": 690,
+        "y": 519.375,
+        "width": 300,
+        "height": 78.75
+      },
+      {
+        "file": "hands/hour-068.png",
+        "x": 690,
+        "y": 517.5,
+        "width": 300,
+        "height": 86.25
+      },
+      {
+        "file": "hands/hour-069.png",
+        "x": 690,
+        "y": 517.5,
+        "width": 298,
+        "height": 91.875
+      },
+      {
+        "file": "hands/hour-070.png",
+        "x": 690,
+        "y": 517.5,
+        "width": 296,
+        "height": 99.375
+      },
+      {
+        "file": "hands/hour-071.png",
+        "x": 690,
+        "y": 517.5,
+        "width": 294,
+        "height": 105
+      },
+      {
+        "file": "hands/hour-072.png",
+        "x": 690,
+        "y": 517.5,
+        "width": 292,
+        "height": 110.625
+      },
+      {
+        "file": "hands/hour-073.png",
+        "x": 690,
+        "y": 515.625,
+        "width": 290,
+        "height": 120
+      },
+      {
+        "file": "hands/hour-074.png",
+        "x": 690,
+        "y": 515.625,
+        "width": 288,
+        "height": 125.625
+      },
+      {
+        "file": "hands/hour-075.png",
+        "x": 690,
+        "y": 515.625,
+        "width": 286,
+        "height": 131.25
+      },
+      {
+        "file": "hands/hour-076.png",
+        "x": 688,
+        "y": 515.625,
+        "width": 286,
+        "height": 136.875
+      },
+      {
+        "file": "hands/hour-077.png",
+        "x": 688,
+        "y": 515.625,
+        "width": 282,
+        "height": 142.5
+      },
+      {
+        "file": "hands/hour-078.png",
+        "x": 690,
+        "y": 513.75,
+        "width": 278,
+        "height": 150
+      },
+      {
+        "file": "hands/hour-079.png",
+        "x": 688,
+        "y": 513.75,
+        "width": 276,
+        "height": 155.625
+      },
+      {
+        "file": "hands/hour-080.png",
+        "x": 688,
+        "y": 513.75,
+        "width": 274,
+        "height": 161.25
+      },
+      {
+        "file": "hands/hour-081.png",
+        "x": 688,
+        "y": 513.75,
+        "width": 270,
+        "height": 166.875
+      },
+      {
+        "file": "hands/hour-082.png",
+        "x": 688,
+        "y": 513.75,
+        "width": 266,
+        "height": 172.5
+      },
+      {
+        "file": "hands/hour-083.png",
+        "x": 690,
+        "y": 513.75,
+        "width": 260,
+        "height": 178.125
+      },
+      {
+        "file": "hands/hour-084.png",
+        "x": 690,
+        "y": 511.875,
+        "width": 256,
+        "height": 185.625
+      },
+      {
+        "file": "hands/hour-085.png",
+        "x": 690,
+        "y": 511.875,
+        "width": 252,
+        "height": 191.25
+      },
+      {
+        "file": "hands/hour-086.png",
+        "x": 690,
+        "y": 511.875,
+        "width": 248,
+        "height": 195
+      },
+      {
+        "file": "hands/hour-087.png",
+        "x": 690,
+        "y": 511.875,
+        "width": 244,
+        "height": 200.625
+      },
+      {
+        "file": "hands/hour-088.png",
+        "x": 690,
+        "y": 511.875,
+        "width": 240,
+        "height": 204.375
+      },
+      {
+        "file": "hands/hour-089.png",
+        "x": 690,
+        "y": 511.875,
+        "width": 236,
+        "height": 210
+      },
+      {
+        "file": "hands/hour-090.png",
+        "x": 690,
+        "y": 511.875,
+        "width": 230,
+        "height": 213.75
+      },
+      {
+        "file": "hands/hour-091.png",
+        "x": 690,
+        "y": 511.875,
+        "width": 226,
+        "height": 219.375
+      },
+      {
+        "file": "hands/hour-092.png",
+        "x": 690,
+        "y": 511.875,
+        "width": 220,
+        "height": 223.125
+      },
+      {
+        "file": "hands/hour-093.png",
+        "x": 690,
+        "y": 511.875,
+        "width": 216,
+        "height": 226.875
+      },
+      {
+        "file": "hands/hour-094.png",
+        "x": 690,
+        "y": 511.875,
+        "width": 210,
+        "height": 232.5
+      },
+      {
+        "file": "hands/hour-095.png",
+        "x": 690,
+        "y": 510,
+        "width": 204,
+        "height": 238.125
+      },
+      {
+        "file": "hands/hour-096.png",
+        "x": 692,
+        "y": 510,
+        "width": 198,
+        "height": 241.875
+      },
+      {
+        "file": "hands/hour-097.png",
+        "x": 692,
+        "y": 510,
+        "width": 192,
+        "height": 245.625
+      },
+      {
+        "file": "hands/hour-098.png",
+        "x": 692,
+        "y": 510,
+        "width": 186,
+        "height": 247.5
+      },
+      {
+        "file": "hands/hour-099.png",
+        "x": 692,
+        "y": 510,
+        "width": 180,
+        "height": 251.25
+      },
+      {
+        "file": "hands/hour-100.png",
+        "x": 692,
+        "y": 510,
+        "width": 174,
+        "height": 255
+      },
+      {
+        "file": "hands/hour-101.png",
+        "x": 692,
+        "y": 510,
+        "width": 168,
+        "height": 258.75
+      },
+      {
+        "file": "hands/hour-102.png",
+        "x": 692,
+        "y": 510,
+        "width": 162,
+        "height": 260.625
+      },
+      {
+        "file": "hands/hour-103.png",
+        "x": 694,
+        "y": 510,
+        "width": 154,
+        "height": 264.375
+      },
+      {
+        "file": "hands/hour-104.png",
+        "x": 694,
+        "y": 510,
+        "width": 148,
+        "height": 266.25
+      },
+      {
+        "file": "hands/hour-105.png",
+        "x": 694,
+        "y": 510,
+        "width": 142,
+        "height": 268.125
+      },
+      {
+        "file": "hands/hour-106.png",
+        "x": 694,
+        "y": 510,
+        "width": 136,
+        "height": 271.875
+      },
+      {
+        "file": "hands/hour-107.png",
+        "x": 694,
+        "y": 510,
+        "width": 130,
+        "height": 273.75
+      },
+      {
+        "file": "hands/hour-108.png",
+        "x": 696,
+        "y": 511.875,
+        "width": 120,
+        "height": 273.75
+      },
+      {
+        "file": "hands/hour-109.png",
+        "x": 696,
+        "y": 511.875,
+        "width": 114,
+        "height": 275.625
+      },
+      {
+        "file": "hands/hour-110.png",
+        "x": 696,
+        "y": 511.875,
+        "width": 108,
+        "height": 277.5
+      },
+      {
+        "file": "hands/hour-111.png",
+        "x": 696,
+        "y": 511.875,
+        "width": 100,
+        "height": 279.375
+      },
+      {
+        "file": "hands/hour-112.png",
+        "x": 698,
+        "y": 511.875,
+        "width": 92,
+        "height": 279.375
+      },
+      {
+        "file": "hands/hour-113.png",
+        "x": 698,
+        "y": 511.875,
+        "width": 86,
+        "height": 281.25
+      },
+      {
+        "file": "hands/hour-114.png",
+        "x": 698,
+        "y": 511.875,
+        "width": 78,
+        "height": 281.25
+      },
+      {
+        "file": "hands/hour-115.png",
+        "x": 698,
+        "y": 511.875,
+        "width": 72,
+        "height": 283.125
+      },
+      {
+        "file": "hands/hour-116.png",
+        "x": 700,
+        "y": 511.875,
+        "width": 62,
+        "height": 283.125
+      },
+      {
+        "file": "hands/hour-117.png",
+        "x": 700,
+        "y": 511.875,
+        "width": 56,
+        "height": 285
+      },
+      {
+        "file": "hands/hour-118.png",
+        "x": 700,
+        "y": 513.75,
+        "width": 50,
+        "height": 283.125
+      },
+      {
+        "file": "hands/hour-119.png",
+        "x": 700,
+        "y": 513.75,
+        "width": 42,
+        "height": 283.125
+      },
+      {
+        "file": "hands/hour-120.png",
+        "x": 702,
+        "y": 513.75,
+        "width": 40,
+        "height": 283.125
+      },
+      {
+        "file": "hands/hour-121.png",
+        "x": 702,
+        "y": 513.75,
+        "width": 40,
+        "height": 283.125
+      },
+      {
+        "file": "hands/hour-122.png",
+        "x": 696,
+        "y": 513.75,
+        "width": 46,
+        "height": 283.125
+      },
+      {
+        "file": "hands/hour-123.png",
+        "x": 688,
+        "y": 513.75,
+        "width": 54,
+        "height": 283.125
+      },
+      {
+        "file": "hands/hour-124.png",
+        "x": 682,
+        "y": 511.875,
+        "width": 62,
+        "height": 283.125
+      },
+      {
+        "file": "hands/hour-125.png",
+        "x": 676,
+        "y": 511.875,
+        "width": 68,
+        "height": 283.125
+      },
+      {
+        "file": "hands/hour-126.png",
+        "x": 668,
+        "y": 511.875,
+        "width": 76,
+        "height": 283.125
+      },
+      {
+        "file": "hands/hour-127.png",
+        "x": 662,
+        "y": 511.875,
+        "width": 82,
+        "height": 281.25
+      },
+      {
+        "file": "hands/hour-128.png",
+        "x": 654,
+        "y": 511.875,
+        "width": 92,
+        "height": 281.25
+      },
+      {
+        "file": "hands/hour-129.png",
+        "x": 648,
+        "y": 511.875,
+        "width": 98,
+        "height": 279.375
+      },
+      {
+        "file": "hands/hour-130.png",
+        "x": 642,
+        "y": 511.875,
+        "width": 104,
+        "height": 277.5
+      },
+      {
+        "file": "hands/hour-131.png",
+        "x": 634,
+        "y": 511.875,
+        "width": 112,
+        "height": 275.625
+      },
+      {
+        "file": "hands/hour-132.png",
+        "x": 628,
+        "y": 511.875,
+        "width": 120,
+        "height": 273.75
+      },
+      {
+        "file": "hands/hour-133.png",
+        "x": 622,
+        "y": 511.875,
+        "width": 126,
+        "height": 271.875
+      },
+      {
+        "file": "hands/hour-134.png",
+        "x": 614,
+        "y": 511.875,
+        "width": 134,
+        "height": 270
+      },
+      {
+        "file": "hands/hour-135.png",
+        "x": 608,
+        "y": 511.875,
+        "width": 140,
+        "height": 268.125
+      },
+      {
+        "file": "hands/hour-136.png",
+        "x": 602,
+        "y": 510,
+        "width": 146,
+        "height": 268.125
+      },
+      {
+        "file": "hands/hour-137.png",
+        "x": 596,
+        "y": 510,
+        "width": 154,
+        "height": 264.375
+      },
+      {
+        "file": "hands/hour-138.png",
+        "x": 590,
+        "y": 510,
+        "width": 160,
+        "height": 262.5
+      },
+      {
+        "file": "hands/hour-139.png",
+        "x": 584,
+        "y": 510,
+        "width": 166,
+        "height": 258.75
+      },
+      {
+        "file": "hands/hour-140.png",
+        "x": 578,
+        "y": 510,
+        "width": 172,
+        "height": 256.875
+      },
+      {
+        "file": "hands/hour-141.png",
+        "x": 572,
+        "y": 510,
+        "width": 178,
+        "height": 253.125
+      },
+      {
+        "file": "hands/hour-142.png",
+        "x": 566,
+        "y": 510,
+        "width": 184,
+        "height": 249.375
+      },
+      {
+        "file": "hands/hour-143.png",
+        "x": 560,
+        "y": 510,
+        "width": 190,
+        "height": 245.625
+      },
+      {
+        "file": "hands/hour-144.png",
+        "x": 554,
+        "y": 511.875,
+        "width": 198,
+        "height": 240
+      },
+      {
+        "file": "hands/hour-145.png",
+        "x": 550,
+        "y": 511.875,
+        "width": 202,
+        "height": 236.25
+      },
+      {
+        "file": "hands/hour-146.png",
+        "x": 544,
+        "y": 511.875,
+        "width": 208,
+        "height": 232.5
+      },
+      {
+        "file": "hands/hour-147.png",
+        "x": 538,
+        "y": 511.875,
+        "width": 214,
+        "height": 228.75
+      },
+      {
+        "file": "hands/hour-148.png",
+        "x": 534,
+        "y": 511.875,
+        "width": 218,
+        "height": 225
+      },
+      {
+        "file": "hands/hour-149.png",
+        "x": 528,
+        "y": 511.875,
+        "width": 224,
+        "height": 221.25
+      },
+      {
+        "file": "hands/hour-150.png",
+        "x": 524,
+        "y": 511.875,
+        "width": 228,
+        "height": 215.625
+      },
+      {
+        "file": "hands/hour-151.png",
+        "x": 518,
+        "y": 511.875,
+        "width": 234,
+        "height": 211.875
+      },
+      {
+        "file": "hands/hour-152.png",
+        "x": 514,
+        "y": 511.875,
+        "width": 238,
+        "height": 206.25
+      },
+      {
+        "file": "hands/hour-153.png",
+        "x": 510,
+        "y": 511.875,
+        "width": 242,
+        "height": 202.5
+      },
+      {
+        "file": "hands/hour-154.png",
+        "x": 506,
+        "y": 511.875,
+        "width": 248,
+        "height": 196.875
+      },
+      {
+        "file": "hands/hour-155.png",
+        "x": 502,
+        "y": 511.875,
+        "width": 252,
+        "height": 193.125
+      },
+      {
+        "file": "hands/hour-156.png",
+        "x": 498,
+        "y": 511.875,
+        "width": 256,
+        "height": 187.5
+      },
+      {
+        "file": "hands/hour-157.png",
+        "x": 494,
+        "y": 513.75,
+        "width": 260,
+        "height": 180
+      },
+      {
+        "file": "hands/hour-158.png",
+        "x": 490,
+        "y": 513.75,
+        "width": 264,
+        "height": 174.375
+      },
+      {
+        "file": "hands/hour-159.png",
+        "x": 486,
+        "y": 513.75,
+        "width": 268,
+        "height": 168.75
+      },
+      {
+        "file": "hands/hour-160.png",
+        "x": 482,
+        "y": 513.75,
+        "width": 272,
+        "height": 163.125
+      },
+      {
+        "file": "hands/hour-161.png",
+        "x": 478,
+        "y": 513.75,
+        "width": 276,
+        "height": 159.375
+      },
+      {
+        "file": "hands/hour-162.png",
+        "x": 476,
+        "y": 513.75,
+        "width": 278,
+        "height": 151.875
+      },
+      {
+        "file": "hands/hour-163.png",
+        "x": 472,
+        "y": 515.625,
+        "width": 282,
+        "height": 144.375
+      },
+      {
+        "file": "hands/hour-164.png",
+        "x": 470,
+        "y": 515.625,
+        "width": 284,
+        "height": 138.75
+      },
+      {
+        "file": "hands/hour-165.png",
+        "x": 468,
+        "y": 515.625,
+        "width": 286,
+        "height": 133.125
+      },
+      {
+        "file": "hands/hour-166.png",
+        "x": 464,
+        "y": 515.625,
+        "width": 290,
+        "height": 127.5
+      },
+      {
+        "file": "hands/hour-167.png",
+        "x": 462,
+        "y": 515.625,
+        "width": 292,
+        "height": 121.875
+      },
+      {
+        "file": "hands/hour-168.png",
+        "x": 460,
+        "y": 517.5,
+        "width": 292,
+        "height": 112.5
+      },
+      {
+        "file": "hands/hour-169.png",
+        "x": 458,
+        "y": 517.5,
+        "width": 294,
+        "height": 106.875
+      },
+      {
+        "file": "hands/hour-170.png",
+        "x": 456,
+        "y": 517.5,
+        "width": 296,
+        "height": 101.25
+      },
+      {
+        "file": "hands/hour-171.png",
+        "x": 456,
+        "y": 517.5,
+        "width": 296,
+        "height": 95.625
+      },
+      {
+        "file": "hands/hour-172.png",
+        "x": 454,
+        "y": 517.5,
+        "width": 298,
+        "height": 88.125
+      },
+      {
+        "file": "hands/hour-173.png",
+        "x": 452,
+        "y": 519.375,
+        "width": 300,
+        "height": 80.625
+      },
+      {
+        "file": "hands/hour-174.png",
+        "x": 452,
+        "y": 519.375,
+        "width": 300,
+        "height": 73.125
+      },
+      {
+        "file": "hands/hour-175.png",
+        "x": 450,
+        "y": 519.375,
+        "width": 302,
+        "height": 67.5
+      },
+      {
+        "file": "hands/hour-176.png",
+        "x": 450,
+        "y": 519.375,
+        "width": 302,
+        "height": 61.875
+      },
+      {
+        "file": "hands/hour-177.png",
+        "x": 448,
+        "y": 521.25,
+        "width": 304,
+        "height": 52.5
+      },
+      {
+        "file": "hands/hour-178.png",
+        "x": 448,
+        "y": 521.25,
+        "width": 302,
+        "height": 46.875
+      },
+      {
+        "file": "hands/hour-179.png",
+        "x": 448,
+        "y": 521.25,
+        "width": 302,
+        "height": 39.375
+      },
+      {
+        "file": "hands/hour-180.png",
+        "x": 448,
+        "y": 523.125,
+        "width": 302,
+        "height": 35.625
+      },
+      {
+        "file": "hands/hour-181.png",
+        "x": 448,
+        "y": 523.125,
+        "width": 302,
+        "height": 37.5
+      },
+      {
+        "file": "hands/hour-182.png",
+        "x": 448,
+        "y": 517.5,
+        "width": 302,
+        "height": 43.125
+      },
+      {
+        "file": "hands/hour-183.png",
+        "x": 448,
+        "y": 511.875,
+        "width": 304,
+        "height": 48.75
+      },
+      {
+        "file": "hands/hour-184.png",
+        "x": 450,
+        "y": 504.375,
+        "width": 302,
+        "height": 58.125
+      },
+      {
+        "file": "hands/hour-185.png",
+        "x": 450,
+        "y": 498.75,
+        "width": 302,
+        "height": 63.75
+      },
+      {
+        "file": "hands/hour-186.png",
+        "x": 450,
+        "y": 491.25,
+        "width": 302,
+        "height": 71.25
+      },
+      {
+        "file": "hands/hour-187.png",
+        "x": 452,
+        "y": 485.625,
+        "width": 300,
+        "height": 76.875
+      },
+      {
+        "file": "hands/hour-188.png",
+        "x": 452,
+        "y": 480,
+        "width": 300,
+        "height": 84.375
+      },
+      {
+        "file": "hands/hour-189.png",
+        "x": 454,
+        "y": 472.5,
+        "width": 298,
+        "height": 91.875
+      },
+      {
+        "file": "hands/hour-190.png",
+        "x": 456,
+        "y": 466.875,
+        "width": 296,
+        "height": 97.5
+      },
+      {
+        "file": "hands/hour-191.png",
+        "x": 458,
+        "y": 461.25,
+        "width": 294,
+        "height": 103.125
+      },
+      {
+        "file": "hands/hour-192.png",
+        "x": 460,
+        "y": 453.75,
+        "width": 292,
+        "height": 110.625
+      },
+      {
+        "file": "hands/hour-193.png",
+        "x": 462,
+        "y": 448.125,
+        "width": 290,
+        "height": 118.125
+      },
+      {
+        "file": "hands/hour-194.png",
+        "x": 464,
+        "y": 442.5,
+        "width": 290,
+        "height": 123.75
+      },
+      {
+        "file": "hands/hour-195.png",
+        "x": 466,
+        "y": 436.875,
+        "width": 288,
+        "height": 129.375
+      },
+      {
+        "file": "hands/hour-196.png",
+        "x": 468,
+        "y": 429.375,
+        "width": 286,
+        "height": 136.875
+      },
+      {
+        "file": "hands/hour-197.png",
+        "x": 472,
+        "y": 423.75,
+        "width": 282,
+        "height": 142.5
+      },
+      {
+        "file": "hands/hour-198.png",
+        "x": 474,
+        "y": 418.125,
+        "width": 280,
+        "height": 150
+      },
+      {
+        "file": "hands/hour-199.png",
+        "x": 478,
+        "y": 412.5,
+        "width": 276,
+        "height": 155.625
+      },
+      {
+        "file": "hands/hour-200.png",
+        "x": 480,
+        "y": 406.875,
+        "width": 274,
+        "height": 161.25
+      },
+      {
+        "file": "hands/hour-201.png",
+        "x": 484,
+        "y": 401.25,
+        "width": 270,
+        "height": 166.875
+      },
+      {
+        "file": "hands/hour-202.png",
+        "x": 488,
+        "y": 395.625,
+        "width": 266,
+        "height": 172.5
+      },
+      {
+        "file": "hands/hour-203.png",
+        "x": 492,
+        "y": 390,
+        "width": 262,
+        "height": 178.125
+      },
+      {
+        "file": "hands/hour-204.png",
+        "x": 494,
+        "y": 386.25,
+        "width": 260,
+        "height": 183.75
+      },
+      {
+        "file": "hands/hour-205.png",
+        "x": 498,
+        "y": 380.625,
+        "width": 254,
+        "height": 189.375
+      },
+      {
+        "file": "hands/hour-206.png",
+        "x": 504,
+        "y": 375,
+        "width": 248,
+        "height": 195
+      },
+      {
+        "file": "hands/hour-207.png",
+        "x": 508,
+        "y": 369.375,
+        "width": 244,
+        "height": 200.625
+      },
+      {
+        "file": "hands/hour-208.png",
+        "x": 512,
+        "y": 365.625,
+        "width": 240,
+        "height": 204.375
+      },
+      {
+        "file": "hands/hour-209.png",
+        "x": 516,
+        "y": 360,
+        "width": 236,
+        "height": 210
+      },
+      {
+        "file": "hands/hour-210.png",
+        "x": 522,
+        "y": 356.25,
+        "width": 230,
+        "height": 213.75
+      },
+      {
+        "file": "hands/hour-211.png",
+        "x": 526,
+        "y": 352.5,
+        "width": 226,
+        "height": 217.5
+      },
+      {
+        "file": "hands/hour-212.png",
+        "x": 530,
+        "y": 346.875,
+        "width": 222,
+        "height": 223.125
+      },
+      {
+        "file": "hands/hour-213.png",
+        "x": 536,
+        "y": 343.125,
+        "width": 216,
+        "height": 226.875
+      },
+      {
+        "file": "hands/hour-214.png",
+        "x": 542,
+        "y": 339.375,
+        "width": 210,
+        "height": 230.625
+      },
+      {
+        "file": "hands/hour-215.png",
+        "x": 546,
+        "y": 335.625,
+        "width": 206,
+        "height": 236.25
+      },
+      {
+        "file": "hands/hour-216.png",
+        "x": 552,
+        "y": 331.875,
+        "width": 200,
+        "height": 240
+      },
+      {
+        "file": "hands/hour-217.png",
+        "x": 558,
+        "y": 328.125,
+        "width": 192,
+        "height": 243.75
+      },
+      {
+        "file": "hands/hour-218.png",
+        "x": 562,
+        "y": 324.375,
+        "width": 188,
+        "height": 247.5
+      },
+      {
+        "file": "hands/hour-219.png",
+        "x": 568,
+        "y": 320.625,
+        "width": 182,
+        "height": 251.25
+      },
+      {
+        "file": "hands/hour-220.png",
+        "x": 574,
+        "y": 316.875,
+        "width": 176,
+        "height": 255
+      },
+      {
+        "file": "hands/hour-221.png",
+        "x": 580,
+        "y": 315,
+        "width": 170,
+        "height": 256.875
+      },
+      {
+        "file": "hands/hour-222.png",
+        "x": 586,
+        "y": 311.25,
+        "width": 164,
+        "height": 260.625
+      },
+      {
+        "file": "hands/hour-223.png",
+        "x": 592,
+        "y": 307.5,
+        "width": 156,
+        "height": 264.375
+      },
+      {
+        "file": "hands/hour-224.png",
+        "x": 598,
+        "y": 305.625,
+        "width": 150,
+        "height": 266.25
+      },
+      {
+        "file": "hands/hour-225.png",
+        "x": 606,
+        "y": 303.75,
+        "width": 142,
+        "height": 268.125
+      },
+      {
+        "file": "hands/hour-226.png",
+        "x": 612,
+        "y": 300,
+        "width": 136,
+        "height": 271.875
+      },
+      {
+        "file": "hands/hour-227.png",
+        "x": 618,
+        "y": 298.125,
+        "width": 130,
+        "height": 273.75
+      },
+      {
+        "file": "hands/hour-228.png",
+        "x": 624,
+        "y": 296.25,
+        "width": 122,
+        "height": 273.75
+      },
+      {
+        "file": "hands/hour-229.png",
+        "x": 630,
+        "y": 294.375,
+        "width": 116,
+        "height": 275.625
+      },
+      {
+        "file": "hands/hour-230.png",
+        "x": 638,
+        "y": 292.5,
+        "width": 108,
+        "height": 277.5
+      },
+      {
+        "file": "hands/hour-231.png",
+        "x": 644,
+        "y": 292.5,
+        "width": 102,
+        "height": 277.5
+      },
+      {
+        "file": "hands/hour-232.png",
+        "x": 650,
+        "y": 290.625,
+        "width": 96,
+        "height": 279.375
+      },
+      {
+        "file": "hands/hour-233.png",
+        "x": 658,
+        "y": 288.75,
+        "width": 86,
+        "height": 281.25
+      },
+      {
+        "file": "hands/hour-234.png",
+        "x": 664,
+        "y": 288.75,
+        "width": 80,
+        "height": 281.25
+      },
+      {
+        "file": "hands/hour-235.png",
+        "x": 672,
+        "y": 286.875,
+        "width": 72,
+        "height": 283.125
+      },
+      {
+        "file": "hands/hour-236.png",
+        "x": 678,
+        "y": 286.875,
+        "width": 66,
+        "height": 283.125
+      },
+      {
+        "file": "hands/hour-237.png",
+        "x": 686,
+        "y": 285,
+        "width": 56,
+        "height": 285
+      },
+      {
+        "file": "hands/hour-238.png",
+        "x": 692,
+        "y": 285,
+        "width": 50,
+        "height": 283.125
+      },
+      {
+        "file": "hands/hour-239.png",
+        "x": 698,
+        "y": 285,
+        "width": 44,
+        "height": 283.125
+      }
+    ]
+  }
+}

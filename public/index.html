@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <title>Часы Первого канала 2000–2011</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="./clock.css">
+  <link rel="preload" href="./assets/manifest.json" as="fetch" crossorigin>
+</head>
+<body>
+  <main id="clock" aria-label="Часы Первого канала 2000–2011">
+    <video id="background" muted autoplay loop playsinline preload="auto" poster="./assets/poster.jpg" disablepictureinpicture aria-hidden="true">
+    </video>
+    <canvas id="hands" width="1440" height="1080" aria-hidden="true"></canvas>
+  </main>
+  <script type="module" src="./clock.js"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+* { box-sizing: border-box; }
+html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: #000; }
+body { display: grid; place-items: center; }
+#clock { position: relative; width: min(100vw, calc(100vh * 4 / 3)); aspect-ratio: 4 / 3; overflow: hidden; }
+@supports (height: 100dvh) { #clock { width: min(100vw, calc(100dvh * 4 / 3)); } }
+#background, #hands { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+#background { object-fit: contain; }
+#hands { pointer-events: none; }
+#debug { position: fixed; z-index: 2; left: 12px; top: 12px; max-height: calc(100% - 24px); overflow: auto; padding: 12px; color: #dcefff; background: #031020e8; font: 12px/1.5 monospace; border-radius: 4px; }
+#debug pre { margin: 8px 0 0; white-space: pre-wrap; }
+#debug button { margin: 0 6px 6px 0; padding: 5px 9px; cursor: pointer; }
