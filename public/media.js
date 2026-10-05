@@ -24,3 +24,17 @@ export function audioCandidates(manifest, mode, supports = () => true) {
   // A WAV decode is always worth trying, even if canPlayType is inconclusive.
   return entries.filter(entry => entry.format === 'wav' || supports(entry.mime)).map(entry => ({ ...entry, url: assetURL(entry.file) }));
 }
+
+export function bufferedAhead(video) {
+  const ranges = video.buffered;
+  if (!ranges) return video.readyState >= 4 ? 2 : 0;
+  for (let i = 0; i < ranges.length; i++) {
+    if (video.currentTime < ranges.start(i) || video.currentTime >= ranges.end(i)) continue;
+    let ahead = ranges.end(i) - video.currentTime;
+    if (video.loop && Number.isFinite(video.duration) && ranges.end(i) >= video.duration - 0.001) {
+      for (let j = 0; j < ranges.length; j++) if (ranges.start(j) < 0.001) { ahead += ranges.end(j); break; }
+    }
+    return ahead;
+  }
+  return 0;
+}

@@ -1,11 +1,31 @@
 * { box-sizing: border-box; }
 html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: #000; }
-body { display: grid; place-items: center; }
+body, #stage { display: grid; place-items: center; }
+#stage { position: relative; width: 100%; height: 100%; background: #000; }
+#stage:fullscreen { width: 100vw; height: 100vh; }
+#stage:-webkit-full-screen { width: 100vw; height: 100vh; }
+[hidden] { display: none !important; }
 #clock { position: relative; width: min(100vw, calc(100vh * 4 / 3)); aspect-ratio: 4 / 3; overflow: hidden; }
+#clock { user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; touch-action: manipulation; }
 @supports (height: 100dvh) { #clock { width: min(100vw, calc(100dvh * 4 / 3)); } }
-#background, #hands { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
-#background { object-fit: contain; }
-#hands { pointer-events: none; }
+#clock video, #hands, #surface { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+#clock video { object-fit: contain; pointer-events: none; z-index: 0; }
+#clock video.is-active { z-index: 1; }
+#hands { pointer-events: none; z-index: 2; }
+#surface { z-index: 3; }
+#clock video::-webkit-media-controls { display: none !important; }
+#loader { position: absolute; z-index: 4; inset: 0; display: grid; place-items: center; background: #020b17; color: #e5eff9; font: 14px/1.5 system-ui, sans-serif; }
+.loader-content { display: grid; justify-items: center; gap: 14px; padding: 24px; }
+.loader-content p { margin: 0; font-size: 18px; }
+.loader-spinner { width: 36px; height: 36px; border: 2px solid #24405d; border-top-color: #a8d9fa; border-radius: 50%; animation: loading 1s linear infinite; }
+@keyframes loading { to { transform: rotate(360deg); } }
+#load-progress { width: 180px; height: 4px; border: 0; border-radius: 2px; overflow: hidden; background: #24405d; accent-color: #a8d9fa; }
+#load-progress::-webkit-progress-bar { background: #24405d; }
+#load-progress::-webkit-progress-value { background: #a8d9fa; }
+#load-status { color: #9eb4ca; font-size: 12px; }
+#start-playback { padding: 9px 18px; border: 1px solid #7094b6; border-radius: 6px; color: #e5eff9; background: #12314d; font: inherit; cursor: pointer; }
+#fullscreen-message { position: absolute; z-index: 5; bottom: max(24px, env(safe-area-inset-bottom)); max-width: calc(100% - 32px); padding: 10px 16px; border-radius: 6px; background: #031020ed; color: #e5eff9; font: 13px/1.5 system-ui, sans-serif; text-align: center; }
+@media (prefers-reduced-motion: reduce) { .loader-spinner { animation: none; } }
 #debug { position: fixed; z-index: 2; left: 12px; top: 12px; max-height: calc(100% - 24px); overflow: auto; padding: 12px; color: #dcefff; background: #031020e8; font: 12px/1.5 monospace; border-radius: 4px; }
 #debug pre { margin: 8px 0 0; white-space: pre-wrap; }
 #debug button { margin: 0 6px 6px 0; padding: 5px 9px; cursor: pointer; }

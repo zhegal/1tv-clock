@@ -10,6 +10,7 @@ export class LoopAudio {
     this.loading = false; this.loadAttempts = 0; this.nextLoad = 0;
     this.nextResume = 0; this.resumePending = false; this.resumeAttempt = 0; this.lastRestart = -Infinity; this.restarts = 0;
     this.listenerController = null; this.abort = new AbortController(); this.disposed = false;
+    this.enabled = true;
     this.gesture = () => this.resume(true);
   }
   init() {
@@ -114,7 +115,7 @@ export class LoopAudio {
   phase() { return this.context?.state === 'running' && this.voice ? this.voicePhase(this.outputTime()) : null; }
   start() {
     const ctx = this.context;
-    if (!this.buffer || ctx.state !== 'running' || this.disposed) return;
+    if (!this.enabled || !this.buffer || ctx.state !== 'running' || this.disposed) return;
     const now = ctx.currentTime; const when = now + 0.04;
     const offset = phaseAt(this.wallNow() + (when - this.outputTime()) * 1000);
     const source = ctx.createBufferSource(); source.buffer = this.buffer;
@@ -144,6 +145,7 @@ export class LoopAudio {
   sync(force = false) {
     if (!this.context || this.disposed) return;
     if (!this.buffer && performance.now() >= this.nextLoad) this.load();
+    if (!this.enabled) return;
     if (this.context.state !== 'running') { this.installUnlock(); this.resume(false); return; }
     this.removeUnlock(); if (!this.buffer) return;
     if (!this.voice) { this.start(); return; }

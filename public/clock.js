@@ -1,15 +1,17 @@
 import { statesAt, phaseAt, phaseError, videoCorrection, ClockMonitor, modulo } from './time.js';
 import { LoopAudio } from './audio.js';
-import { VideoLoop } from './video.js';
-import { parseQuality, chooseQuality, assetURL, videoCandidates, audioCandidates } from './media.js';
+import { VideoLoop, VideoUpgrade } from './video.js';
+import { ClockPresentation } from './presentation.js';
+import { parseQuality, chooseQuality, assetURL, videoCandidates, audioCandidates, bufferedAhead } from './media.js';
 
 const query = new URLSearchParams(location.search);
 const debug = query.get('debug') === '1';
 const requestedQuality = parseQuality(query.get('quality'));
 const mode = query.get('audio') === 'night' ? 'night' : 'day';
-const video = document.getElementById('background');
+let video = document.getElementById('background');
+const videoNodes = [video, document.getElementById('background-next')];
 // Set the IDL properties as well as HTML attributes for native autoplay.
-video.muted = true; video.defaultMuted = true;
+for (const element of videoNodes) { element.muted = true; element.defaultMuted = true; element.controls = false; }
 const canvas = document.getElementById('hands');
 const context = canvas.getContext('2d');
 const wallNow = () => Date.now();
@@ -24,23 +26,68 @@ let decoded = 0, assetError = '', loading = false, assetAttempts = 0, nextAssets
 let lastCheck = -Infinity, videoInitialized = false, videoError = '';
 let videoGeneration = 0;
 let nextVideoRetry = 0, videoAttempts = 0, playPending = false, videoSeeks = 0, videoAutoplayBlocked = false;
-let progressPhase = null, progressMono = 0, lastSeek = -Infinity;
+let progressPhase = null, progressMono = 0, lastSeek = -Infinity, videoProgressed = false;
 let stallReported = false, recovering = false, output, debugUpdates = 0;
 let frameRequest = null, lastPresented = performance.now(), presentedTime = null, qualityFrames = null;
 let videoLoops = 0, videoLoopGapMs = null, videoMaxLoopGapMs = 0, videoNativeSeeks = 0;
 let lastVideoSeek = null;
-const audio = new LoopAudio(mode, wallNow, () => { if (debug) updateDebug(); });
-const videoLoop = new VideoLoop(video, () => {
+let upgrade = null, upgradeNextIndex = 0, videoUpgrades = 0, upgradeError = '';
+const presentation = new ClockPresentation(...['stage','clock','loader','load-progress','load-status','start-playback','fullscreen-message'].map(id => document.getElementById(id)), activate);
+const audio = new LoopAudio(mode, wallNow, () => { updateStartup(); if (debug) updateDebug(); });
+audio.enabled = false;
+function resetVideoState() {
   videoGeneration++; playPending = false; videoInitialized = false;
   lastSeek = -Infinity; nextVideoRetry = 0; progressPhase = null;
-  progressMono = lastPresented = performance.now(); stallReported = false;
-}, wallNow, () => syncVideo(false));
+  progressMono = lastPresented = performance.now(); stallReported = false; videoProgressed = false;
+}
+let videoLoop = new VideoLoop(video, resetVideoState, wallNow, () => syncVideo(false));
+
+function updateStartup() {
+  if (stopped || presentation.shown) return;
+  const frameReady = typeof video.requestVideoFrameCallback === 'function'
+    ? presentedTime !== null && performance.now() - lastPresented < 250 && Math.abs(phaseError(presentedTime, phaseAt(wallNow()))) < 0.15
+    : videoProgressed;
+  const videoReady = videoInitialized && video.readyState >= 3 && !video.paused && !video.seeking && frameReady && bufferedAhead(video) >= 1.5 && Math.abs(phaseError(video.currentTime, phaseAt(wallNow()))) < 0.12;
+  const audioReady = !!audio.buffer || audio.status === 'unavailable' || audio.status === 'load-error';
+  presentation.update(decoded, 540, videoReady, audioReady, videoAutoplayBlocked, !!(assetError || mediaError || videoError));
+  if (decoded === 540 && videoReady && audioReady && !document.hidden) {
+    paint(); presentation.reveal(); audio.enabled = true; audio.sync(true); maybeUpgrade();
+  }
+}
+function maybeUpgrade() {
+  if (stopped || !presentation.shown || upgrade || upgradeNextIndex >= profileIndex) return;
+  if (videoLoop.loading || bufferedAhead(video) < 5) return;
+  const index = upgradeNextIndex++, element = videoNodes.find(candidate => candidate !== video);
+  const candidate = new VideoUpgrade(element, profiles[index], prepared => {
+    if (stopped || upgrade !== candidate) { prepared.dispose(); return; }
+    const previousVideo = video, previousLoop = videoLoop;
+    if (frameRequest !== null) previousVideo.cancelVideoFrameCallback?.(frameRequest);
+    frameRequest = null; video = prepared.video; videoLoop = prepared.loop;
+    videoLoop.onFallback = resetVideoState; videoLoop.onReady = () => syncVideo(false);
+    selectedVideo = profiles[index]; profileIndex = index; videoGeneration++; playPending = false;
+    videoInitialized = true; lastSeek = performance.now(); presentedTime = prepared.presented?.time ?? video.currentTime;
+    lastPresented = progressMono = performance.now(); progressPhase = video.currentTime; stallReported = false; videoProgressed = true;
+    videoError = ''; videoAttempts = 0; nextVideoRetry = 0;
+    previousVideo.id = 'background-next'; video.id = 'background';
+    video.classList.add('is-active'); previousVideo.classList.remove('is-active');
+    upgrade = null; videoUpgrades++; paint(); observePresentation();
+    previousLoop.dispose(); previousVideo.pause(); previousVideo.removeAttribute('src'); previousVideo.load();
+    if (debug) updateDebug();
+  }, reason => {
+    if (upgrade !== candidate || stopped) return;
+    upgrade = null; upgradeError = reason; videoFallbacks++;
+    videoFallbackReason = `${profiles[index].name}: upgrade failed; keeping ${selectedVideo.name}`;
+    if (debug) updateDebug();
+  }, wallNow);
+  upgrade = candidate;
+}
 
 function selectVideo(index) {
   selectedVideo = profiles[index]; profileIndex = index;
   if (!selectedVideo) { videoError = 'No supported video source'; return; }
   recovering = true; videoGeneration++; playPending = false; videoInitialized = false; lastSeek = -Infinity;
   nextVideoRetry = 0; progressPhase = null; progressMono = performance.now(); lastPresented = progressMono;
+  videoProgressed = false;
   if (frameRequest !== null && typeof video.cancelVideoFrameCallback === 'function') video.cancelVideoFrameCallback(frameRequest);
   frameRequest = null; presentedTime = null; stallReported = false;
   videoLoop.load(selectedVideo); recovering = false;
@@ -63,7 +110,7 @@ async function loadMedia() {
     const preferred = chooseQuality(requestedQuality, selectionHints);
     if (profiles[0] && profiles[0].name !== preferred) { videoFallbacks++; videoFallbackReason = `${preferred}: unavailable or unsupported; selected ${profiles[0].name}`; }
     audio.candidates = audioCandidates(data, mode, supports);
-    media = data; mediaError = ''; selectVideo(0); audio.init();
+    media = data; mediaError = ''; selectVideo(profiles.length - 1); audio.init();
   } catch (error) {
     mediaError = String(error); nextMedia = performance.now() + Math.min(60000, 1000 * 2 ** Math.min(mediaAttempts, 6));
   } finally { clearTimeout(timeout); mediaLoading = false; if (debug) updateDebug(); }
@@ -77,7 +124,7 @@ async function imageFor(entry) {
     const decode = typeof image.decode === 'function' ? image.decode() : new Promise((resolve, reject) => { image.onload = resolve; image.onerror = reject; });
     await Promise.race([decode, timeout]);
     if (stopped) return;
-    images.set(entry.file, image); decoded++; paint();
+    images.set(entry.file, image); decoded++; paint(); updateStartup();
   } finally { clearTimeout(image._timer); image.onload = null; image.onerror = null; }
 }
 async function loadAssets() {
@@ -107,7 +154,7 @@ async function loadAssets() {
     assetError = ''; assetAttempts = 0;
   } catch (error) {
     assetError = String(error); nextAssets = performance.now() + Math.min(60000, 1000 * 2 ** Math.min(assetAttempts, 6));
-  } finally { loading = false; if (!stopped) paint(); }
+  } finally { loading = false; if (!stopped) { paint(); updateStartup(); } }
 }
 function paint() {
   if (!manifest || stopped) return;
@@ -131,7 +178,7 @@ function playVideo() {
     Promise.resolve(video.play()).then(() => {
       if (generation !== videoGeneration || stopped) return;
       videoError = ''; videoAutoplayBlocked = false; videoAttempts = 0; nextVideoRetry = 0;
-    }).catch(error => { if (generation !== videoGeneration || stopped) return; videoError = String(error); if (error.name === 'NotAllowedError') videoAutoplayBlocked = true; else videoRetry(); }).finally(() => { if (generation === videoGeneration) playPending = false; });
+    }).catch(error => { if (generation !== videoGeneration || stopped) return; videoError = String(error); if (error.name === 'NotAllowedError') videoAutoplayBlocked = true; else videoRetry(); updateStartup(); }).finally(() => { if (generation === videoGeneration) playPending = false; });
   } catch (error) { playPending = false; videoError = String(error); videoRetry(); }
 }
 function seekVideo() {
@@ -163,6 +210,7 @@ function observePresentation() {
       if (presentedTime === null || Math.abs(phaseError(metadata.mediaTime, presentedTime)) > 0.005) {
         presentedTime = metadata.mediaTime; lastPresented = performance.now();
       }
+      if (!presentation.shown) updateStartup();
       if (!stopped) observePresentation();
     });
   } else if (typeof video.getVideoPlaybackQuality === 'function') {
@@ -208,6 +256,7 @@ function syncVideo(force = false) {
   if (!document.hidden && !video.paused && mono - lastPresented > 5000) stallReported = true;
   // Fallback progress tracking for engines without presentation observation.
   if (progressPhase === null || Math.abs(phaseError(video.currentTime, progressPhase)) > 0.015) {
+    if (progressPhase !== null) videoProgressed = true;
     progressPhase = video.currentTime; progressMono = mono;
   } else if (!document.hidden && !video.paused && !video.seeking && mono - progressMono > 5000) stallReported = true;
 }
@@ -225,6 +274,7 @@ function tick() {
     syncVideo(jumped); audio.sync(jumped); lastCheck = mono;
     if (!media && !mediaLoading && mono >= nextMedia) loadMedia();
     if (decoded < 540 && !loading && mono >= nextAssets) loadAssets();
+    updateStartup(); maybeUpgrade();
   }
   if (debug) updateDebug();
   schedule();
@@ -241,6 +291,10 @@ function updateDebug() {
   const wall = wallNow(), ap = audio.phase(), vp = modulo(video.currentTime);
   const data = {
     requestedQuality, selectedVideoProfile: selectedVideo?.name || null,
+    startupReady: presentation.shown, loadingProgress: presentation.progress.value,
+    fullscreenActive: (document.fullscreenElement || document.webkitFullscreenElement) === presentation.stage,
+    targetVideoProfile: profiles[0]?.name || null, pendingVideoProfile: upgrade?.profile.name || null,
+    videoUpgrades, upgradeError,
     videoResolution: selectedVideo ? `${selectedVideo.width}×${selectedVideo.height}` : null,
     videoFormat: selectedVideo?.mime || null, videoBytes: selectedVideo?.bytes || null,
     selectionHints, videoFallbacks, videoFallbackReason, mediaError,
@@ -269,25 +323,34 @@ if (debug) {
   output = document.createElement('pre'); output.id = 'diagnostics'; panel.append(output); document.body.append(panel);
 }
 const listen = (target, name, fn) => target.addEventListener(name, fn, { signal: events.signal });
-listen(video, 'loadedmetadata', () => { seekVideo(); playVideo(); });
-listen(video, 'canplay', () => { syncVideo(false); playVideo(); });
-listen(video, 'playing', () => { stallReported = false; progressMono = performance.now(); progressPhase = null; });
-listen(video, 'seeked', () => { if (video.paused) playVideo(); });
-listen(video, 'seeking', () => { videoNativeSeeks++; });
-listen(video, 'pause', () => { if (!recovering && !document.hidden) playVideo(); });
-listen(video, 'ended', () => { seekVideo(); playVideo(); });
-listen(video, 'stalled', () => { stallReported = true; });
-listen(video, 'error', () => {
+for (const element of videoNodes) {
+const activeListen = (name, fn) => listen(element, name, event => { if (element === video) fn(event); });
+activeListen('loadedmetadata', () => { seekVideo(); playVideo(); });
+activeListen('canplay', () => { syncVideo(false); playVideo(); updateStartup(); });
+activeListen('playing', () => { stallReported = false; progressMono = performance.now(); progressPhase = null; });
+activeListen('seeked', () => { if (video.paused) playVideo(); });
+activeListen('seeking', () => { videoNativeSeeks++; });
+activeListen('pause', () => { if (!recovering && !document.hidden) playVideo(); });
+activeListen('ended', () => { seekVideo(); playVideo(); });
+activeListen('stalled', () => { stallReported = true; });
+activeListen('error', () => {
   videoError = `Video error ${video.error?.code || 'unknown'}`;
   if (videoLoop.mode === 'continuous') videoLoop.fallback(new Error(videoError), videoLoop.generation);
   else syncVideo(false);
 });
+}
 listen(document, 'visibilitychange', recover);
 listen(window, 'pageshow', recover);
 listen(window, 'focus', recover);
 listen(window, 'online', () => { nextAssets = 0; nextMedia = 0; audio.nextLoad = 0; nextVideoRetry = 0; recover(); });
 // Muted video normally autoplays. If the host explicitly blocks even silent
 // video, wait invisibly for activation instead of seeking a paused image.
+function activate() {
+  // Preserve the synchronous user-activation stack on low-power iOS devices.
+  videoAutoplayBlocked = false; nextVideoRetry = 0;
+  audio.resume(true);
+  unlockVideo(); upgrade?.play(); updateStartup();
+}
 function unlockVideo() {
   if (video.paused) { videoAutoplayBlocked = false; nextVideoRetry = 0; seekVideo(); playVideo(); }
 }
@@ -295,6 +358,7 @@ for (const name of ['pointerdown', 'touchstart', 'keydown']) listen(window, name
 listen(window, 'pagehide', event => {
   if (event.persisted) return; // bfcache restores the same listeners/context.
   stopped = true; clearTimeout(timer); events.abort(); audio.dispose(); videoLoop.dispose(); images.clear();
+  upgrade?.dispose(); presentation.dispose();
   if (frameRequest !== null && typeof video.cancelVideoFrameCallback === 'function') video.cancelVideoFrameCallback(frameRequest);
 });
 loadMedia(); loadAssets(); schedule(); updateDebug();

@@ -56,6 +56,14 @@ test('thousands of normal loops reuse one source and never accumulate nodes', ()
   assert.ok(Math.abs(phaseError(audio.phase(),phaseAt(600000000)))<1e-6);
   audio.dispose();
 });
+test('unlocked audio stays silent behind the loader and starts at current time on reveal', async()=>{
+  const {audio,ctx,setWall}=setup();audio.enabled=false;ctx.blocked=false;
+  audio.resume(true);await drain();audio.sync(true);audio.start();
+  assert.equal(ctx.state,'running');assert.equal(ctx.sources.length,0);
+  ctx.currentTime=8;setWall(49_200);audio.enabled=true;audio.sync(true);
+  assert.equal(ctx.sources.length,1);assert.ok(Math.abs(ctx.sources[0].startArgs[1]-49.28)<1e-6);
+  audio.dispose();
+});
 test('wall time jump crossfades with old voice stopped and disconnected', ()=>{
   const {audio,ctx,setWall}=setup();ctx.state='running';audio.sync();
   audio.lastRestart=-Infinity;ctx.currentTime=1;setWall(26_000);audio.sync(true);

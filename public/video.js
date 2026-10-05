@@ -1,5 +1,5 @@
-import { LOOP, phaseAt } from './time.js';
-import { assetURL } from './media.js';
+import { LOOP, phaseAt, phaseError, videoCorrection } from './time.js';
+import { assetURL, bufferedAhead } from './media.js';
 
 // Keep consecutive copies on one decoder timeline. Native <video loop> seeks
 // back to zero and can stop presenting frames while the decoder restarts.
@@ -141,5 +141,84 @@ export class VideoLoop {
     if (this.url) URL.revokeObjectURL(this.url);
     this.request = null; this.url = null; this.source = null; this.buffer = null;
     this.chunks = null; this.busy = this.loading = false; this.end = 0;
+  }
+}
+
+// Prepare a second decoder while the current clock remains visible. Hand it
+// over only after it has presented an aligned frame with enough data ahead.
+export class VideoUpgrade {
+  constructor(video, profile, ready, failed, wallNow = () => Date.now()) {
+    Object.assign(this, { video, profile, ready, failed, wallNow });
+    this.events = new AbortController(); this.stopped = false; this.initialized = false;
+    this.lastSeek = -Infinity; this.playPending = false; this.playGeneration = 0;
+    this.presented = null; this.frameRequest = null; this.started = performance.now();
+    this.loop = new VideoLoop(video, () => { this.initialized = false; this.playGeneration++; this.playPending = false; this.lastSeek = -Infinity; }, wallNow, () => this.check());
+    for (const name of ['loadedmetadata', 'canplay', 'playing', 'seeked']) video.addEventListener(name, () => this.check(), { signal: this.events.signal });
+    video.addEventListener('error', () => {
+      if (this.loop.mode === 'continuous') this.loop.fallback(new Error('Upgrade media error'), this.loop.generation);
+      else this.fail('Upgrade media error');
+    }, { signal: this.events.signal });
+    this.loop.load(profile); this.check();
+  }
+  play() {
+    if (this.playPending || this.stopped || !this.video.paused) return;
+    this.playPending = true; const generation = this.playGeneration;
+    try {
+      Promise.resolve(this.video.play()).catch(error => {
+        if (!this.stopped && generation === this.playGeneration) this.fail(String(error));
+      }).finally(() => { if (generation === this.playGeneration) this.playPending = false; });
+    } catch (error) { this.fail(String(error)); }
+  }
+  seek() {
+    const video = this.video, mono = performance.now();
+    if (video.readyState < 1 || video.seeking || mono - this.lastSeek < 1000) return;
+    const target = this.loop.seekTarget(phaseAt(this.wallNow()));
+    if (this.loop.mode === 'continuous' && !Array.from({ length: video.buffered.length }, (_, i) => target >= video.buffered.start(i) && target < video.buffered.end(i)).some(Boolean)) return;
+    try {
+      video.currentTime = target; video.playbackRate = 1; this.lastSeek = mono; this.presented = null;
+      this.initialized = video.seeking || Math.abs(phaseError(video.currentTime, target)) < 0.06;
+    } catch (error) { this.fail(String(error)); }
+  }
+  observe() {
+    if (this.frameRequest !== null || typeof this.video.requestVideoFrameCallback !== 'function') return;
+    this.frameRequest = this.video.requestVideoFrameCallback((_, metadata) => {
+      this.frameRequest = null; this.presented = { time: metadata.mediaTime, mono: performance.now() };
+      this.check();
+    });
+  }
+  check() {
+    clearTimeout(this.timer);
+    if (this.stopped) return;
+    if (performance.now() - this.started > 45000) { this.fail('Upgrade timeout'); return; }
+    this.loop.maintain();
+    if (!this.initialized) this.seek();
+    if (this.stopped) return;
+    this.play(); this.observe();
+    const video = this.video, error = phaseError(video.currentTime, phaseAt(this.wallNow()));
+    if (video.readyState >= 3 && !video.seeking) {
+      const correction = videoCorrection(error);
+      if (correction.seek) this.seek(); else video.playbackRate = correction.rate;
+      const presented = this.presented && performance.now() - this.presented.mono < 250 && Math.abs(phaseError(this.presented.time, phaseAt(this.wallNow()))) < 0.12;
+      // Engines without frame callbacks must show actual timeline progress.
+      const progressed = typeof video.requestVideoFrameCallback !== 'function' && this.previousTime !== undefined && Math.abs(phaseError(video.currentTime, this.previousTime)) > 0.015;
+      if (this.initialized && !video.paused && Math.abs(error) < 0.1 && bufferedAhead(video) >= 1.5 && (presented || progressed)) {
+        this.detach(); this.ready(this); return;
+      }
+    }
+    this.previousTime = video.currentTime;
+    if (!this.stopped) this.timer = setTimeout(() => this.check(), 150);
+  }
+  fail(reason) {
+    if (this.stopped) return;
+    this.dispose(); this.failed(reason);
+  }
+  detach() {
+    this.stopped = true; this.events.abort(); clearTimeout(this.timer);
+    if (this.frameRequest !== null) this.video.cancelVideoFrameCallback?.(this.frameRequest);
+    this.frameRequest = null;
+  }
+  dispose() {
+    this.detach(); this.loop.dispose(); this.video.pause();
+    this.video.removeAttribute('src'); this.video.load();
   }
 }

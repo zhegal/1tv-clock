@@ -10,10 +10,23 @@
   <link rel="preload" href="./assets/manifest.json" as="fetch" crossorigin>
 </head>
 <body>
-  <main id="clock" aria-label="Часы Первого канала 2000–2011">
-    <video id="background" muted autoplay loop playsinline preload="auto" poster="./assets/poster.jpg" disablepictureinpicture aria-hidden="true">
-    </video>
-    <canvas id="hands" width="1440" height="1080" aria-hidden="true"></canvas>
+  <main id="stage" aria-label="Часы Первого канала 2000–2011" aria-busy="true">
+    <div id="clock">
+      <video id="background" class="is-active" muted loop playsinline preload="auto" poster="./assets/poster.jpg" disablepictureinpicture disableremoteplayback controlslist="nodownload nofullscreen noremoteplayback" aria-hidden="true"></video>
+      <video id="background-next" muted loop playsinline preload="auto" disablepictureinpicture disableremoteplayback controlslist="nodownload nofullscreen noremoteplayback" aria-hidden="true"></video>
+      <canvas id="hands" width="1440" height="1080" aria-hidden="true"></canvas>
+      <div id="surface" aria-hidden="true"></div>
+    </div>
+    <div id="loader" role="status" aria-live="polite">
+      <div class="loader-content">
+        <span class="loader-spinner" aria-hidden="true"></span>
+        <p>Загрузка часов</p>
+        <progress id="load-progress" max="100" value="0" aria-label="Загрузка часов"></progress>
+        <span id="load-status">Подготавливаем изображение…</span>
+        <button id="start-playback" type="button" hidden>Запустить часы</button>
+      </div>
+    </div>
+    <div id="fullscreen-message" role="status" hidden>Этот браузер не поддерживает полноэкранный режим часов.</div>
   </main>
   <script type="module" src="./clock.js"></script>
 </body>
