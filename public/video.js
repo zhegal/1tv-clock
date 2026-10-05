@@ -59,6 +59,7 @@ export class VideoLoop {
         await this.update(() => this.buffer.appendBuffer(this.chunks[index + 1]));
         if (generation !== this.generation) return;
         if (step === 0) this.onReady();
+        if (generation !== this.generation) return;
       }
       // Complete the second copy from cached tail fragments when we started
       // mid-minute. All later repetitions use this same in-memory asset.

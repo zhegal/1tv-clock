@@ -9,10 +9,10 @@ const profile = {
 };
 const file = new Uint8Array([255, 0, 0, 1, 1, 2, 2]);
 
-async function exercise(run, { range = true, fail = false, supported = true } = {}) {
+async function exercise(run, { range = true, fail = false, supported = true, replaceOnReady = false } = {}) {
   const original = { MediaSource: globalThis.MediaSource, fetch: globalThis.fetch,
     create: URL.createObjectURL, revoke: URL.revokeObjectURL };
-  const ranges = [], appends = [], revokes = [];
+  const ranges = [], appends = [], revokes = [], urls = [];
   let fallbacks = 0, seeks = 0, position = 0;
   const video = { load() {}, buffered: { length: 0, start: () => 0, end: () => 0 },
     get currentTime() { return position; }, set currentTime(value) { seeks++; position = value; } };
@@ -33,7 +33,8 @@ async function exercise(run, { range = true, fail = false, supported = true } = 
     static isTypeSupported() { return supported; }
     addSourceBuffer() { return new Buffer(); }
   };
-  globalThis.fetch = async (_, options) => {
+  globalThis.fetch = async (url, options) => {
+    urls.push(url);
     const match = options.headers.Range.match(/bytes=(\d+)-(\d+)/);
     const start = +match[1], end = +match[2] + 1; ranges.push([start, end]);
     const bytes = range ? file.slice(start, end) : file;
@@ -41,11 +42,13 @@ async function exercise(run, { range = true, fail = false, supported = true } = 
   };
   URL.createObjectURL = source => { queueMicrotask(() => source.dispatchEvent(new Event('sourceopen'))); return 'blob:video'; };
   URL.revokeObjectURL = url => revokes.push(url);
-  const loop = new VideoLoop(video, () => fallbacks++, () => 52000);
+  const loop = new VideoLoop(video, () => fallbacks++, () => 52000, () => {
+    if (replaceOnReady) { replaceOnReady = false; loop.load({ ...profile, file: 'replacement.mp4' }); }
+  });
   const drain = async () => { for (let i = 0; i < 100; i++) await Promise.resolve(); };
   try {
     loop.load(profile); await drain();
-    await run({ loop, video, ranges, appends, revokes, drain,
+    await run({ loop, video, ranges, appends, revokes, urls, drain,
       advance: value => { position = value; loop.maintain(); }, counts: () => ({ seeks, fallbacks }) });
   } finally {
     loop.dispose(); globalThis.MediaSource = original.MediaSource; globalThis.fetch = original.fetch;
@@ -71,6 +74,13 @@ test('a host that ignores Range downloads the video once', () => exercise(async 
   assert.equal(loop.mode, 'continuous'); assert.equal(ranges.length, 1);
   assert.deepEqual(appends, [40, 60, 80, 100]);
 }, { range: false }));
+
+test('switching source on the first decoded fragment stops the old loading sequence', () => exercise(async ({ loop, urls, counts }) => {
+  assert.equal(loop.profile.file, 'replacement.mp4'); assert.equal(loop.mode, 'continuous');
+  assert.equal(urls.filter(url => url.endsWith('/test.mp4')).length, 2);
+  assert.equal(urls.filter(url => url.endsWith('/replacement.mp4')).length, 4);
+  assert.equal(counts().fallbacks, 0);
+}, { replaceOnReady: true }));
 
 test('a MediaSource buffer error falls back to native playback and releases its resources', () => exercise(async ({ loop, video, revokes, counts }) => {
   assert.equal(loop.mode, 'native'); assert.equal(video.loop, true);
