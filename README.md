@@ -54,7 +54,7 @@ npm start
 
 ## GitHub Pages
 
-В Settings → Pages выбрать **GitHub Actions**. Workflow `.github/workflows/pages.yml` запускается при push в `main` и вручную через workflow_dispatch: проверяет тесты, копирует `public/` в `.pages/` и публикует статический артефакт официальными Pages actions.
+В Settings → Pages выбрать **GitHub Actions**. Workflow `.github/workflows/pages.yml` запускается при push в `main` и вручную через workflow_dispatch: проверяет тесты, копирует `public/` в `.pages/`, добавляет общую версию к URL скриптов и стилей и публикует статический артефакт официальными Pages actions. Изменение любого модуля обновляет версию всего набора, исключая смешивание старого и нового кода в кеше.
 
 Адрес project site: `https://USERNAME.github.io/REPOSITORY/`. Пути к ресурсам относительные; размещение в подкаталоге поддерживается. Все готовые медиа входят в репозиторий.
 

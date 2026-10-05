@@ -3,9 +3,9 @@ import assert from 'node:assert/strict';
 import { parseQuality, chooseQuality, videoCandidates, audioCandidates, assetURL, handPreloadPlan } from '../public/media.js';
 import { statesAt, phaseAt } from '../public/time.js';
 import { buildPages } from '../scripts/build-pages.mjs';
-import { readFile, mkdtemp, cp, rm, readdir } from 'node:fs/promises';
+import { readFile, writeFile, mkdtemp, cp, rm, readdir } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import { join, basename } from 'node:path';
 const manifest = JSON.parse(await readFile(new URL('../public/assets/media-manifest.json', import.meta.url)));
 
 test('quality parsing and explicit precedence; auto uses physical width and optional connection', () => {
@@ -63,11 +63,20 @@ test('Pages build copies the complete static product without changing manifests'
   try {
     const source=join(temp,'public'), output=join(temp,'site');
     await cp(new URL('../public/',import.meta.url),source,{recursive:true});
+    await writeFile(join(source,'.DS_Store'),'local metadata');
     assert.equal(await buildPages(source,output),559);
     assert.equal(await readFile(join(output,'assets/media-manifest.json'),'utf8'),await readFile(join(source,'assets/media-manifest.json'),'utf8'));
-    const inputFiles=(await readdir(source,{recursive:true})).sort();
+    const inputFiles=(await readdir(source,{recursive:true})).filter(x=>!['.DS_Store','Thumbs.db'].includes(basename(x))).sort();
     const outputFiles=(await readdir(output,{recursive:true})).filter(x=>x!=='.nojekyll').sort();
     assert.deepEqual(outputFiles,inputFiles);
     assert.ok(outputFiles.includes('assets/night.ogg'));
+    const html=await readFile(join(output,'index.html'),'utf8');
+    const version=html.match(/clock\.js\?v=([0-9a-f]{12})/)[1];
+    assert.ok(html.includes(`clock.css?v=${version}`));
+    assert.ok((await readFile(join(output,'clock.js'),'utf8')).includes(`./video.js?v=${version}`));
+    assert.ok((await readFile(join(output,'video.js'),'utf8')).includes(`./media.js?v=${version}`));
+    await writeFile(join(source,'time.js'),(await readFile(join(source,'time.js'),'utf8'))+'\n// deployment change\n');
+    await buildPages(source,output);
+    assert.notEqual((await readFile(join(output,'index.html'),'utf8')).match(/clock\.js\?v=([0-9a-f]{12})/)[1],version,'a dependency change invalidates the entire module graph');
   } finally { await rm(temp,{recursive:true,force:true}); }
 });
