@@ -1,3 +1,4 @@
+import { statesAt } from './time.js';
 // Delivery choices never participate in clock state or phase calculations.
 const qualities = ['auto', 'high', 'medium', 'low'];
 export function parseQuality(value) { return qualities.includes(value) ? value : 'auto'; }
@@ -37,4 +38,26 @@ export function bufferedAhead(video) {
     return ahead;
   }
   return 0;
+}
+
+export function handPreloadPlan(manifest, wallMs) {
+  const initial = new Map(), ordered = new Map();
+  const addAt = (target, wall) => {
+    const state = statesAt(wall);
+    for (const [kind, index] of [['hour', state.hour], ['min', state.minute]]) {
+      const entry = manifest.hands[kind][index]; target.set(entry.file, entry);
+    }
+  };
+  // A complete seconds sequence plus two minutes of the slower hands gives
+  // immediate, uninterrupted playback without 540 startup HTTP requests.
+  for (let seconds = 0; seconds <= 120; seconds++) addAt(initial, wallMs + seconds * 1000);
+  const second = statesAt(wallMs).second;
+  for (let offset = 0; offset < 60; offset++) {
+    const entry = manifest.hands.sec[(second + offset) % 60]; initial.set(entry.file, entry);
+  }
+  // Load soon-needed states first; never decode all minute states before a
+  // nearer hour change. The final pass covers timezone/DST gaps as well.
+  for (let seconds = 0; seconds <= 43200; seconds += 15) addAt(ordered, wallMs + seconds * 1000);
+  for (const entry of Object.values(manifest.hands).flat()) ordered.set(entry.file, entry);
+  return { initial: [...initial.values()], remaining: [...ordered.values()].filter(entry => !initial.has(entry.file)) };
 }

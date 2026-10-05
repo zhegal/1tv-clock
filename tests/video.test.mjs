@@ -58,13 +58,14 @@ async function exercise(run, { range = true, fail = false, supported = true, rep
 
 test('continuous video starts at the current phase and reuses cached media across 100 minutes without seeking', () => exercise(async ({ loop, video, ranges, appends, advance, drain, counts }) => {
   assert.equal(loop.mode, 'continuous'); assert.equal(video.loop, false);
-  assert.deepEqual(ranges, [[0, 1], [5, 7], [1, 3], [3, 5]]);
+  assert.deepEqual(ranges, [[0, 1], [5, 7], [1, 5]]);
+  assert.equal(ranges.reduce((n, [start, end]) => n + end - start, 0), profile.bytes, 'startup downloads the asset exactly once');
   assert.deepEqual(appends, [40, 60, 80, 100]);
   assert.equal(loop.seekTarget(0.01), 60.01);
   advance(119.99); await drain(); assert.equal(loop.seekTarget(0.01), 120.01);
   assert.equal(loop.seekTarget(59.9), 119.9);
   for (let minute = 2; minute < 102; minute++) { advance(minute * 60 + 45); await drain(); }
-  assert.equal(ranges.length, 4, 'later minutes never fetch video again');
+  assert.equal(ranges.length, 3, 'later minutes never fetch video again');
   assert.equal(loop.chunks.reduce((n, chunk) => n + chunk.byteLength, 0), profile.bytes);
   assert.ok(video.buffered.end(0) - video.buffered.start(0) <= 85, 'old video data is removed');
   assert.deepEqual(counts(), { seeks: 0, fallbacks: 0 });
@@ -78,7 +79,7 @@ test('a host that ignores Range downloads the video once', () => exercise(async 
 test('switching source on the first decoded fragment stops the old loading sequence', () => exercise(async ({ loop, urls, counts }) => {
   assert.equal(loop.profile.file, 'replacement.mp4'); assert.equal(loop.mode, 'continuous');
   assert.equal(urls.filter(url => url.endsWith('/test.mp4')).length, 2);
-  assert.equal(urls.filter(url => url.endsWith('/replacement.mp4')).length, 4);
+  assert.equal(urls.filter(url => url.endsWith('/replacement.mp4')).length, 3);
   assert.equal(counts().fallbacks, 0);
 }, { replaceOnReady: true }));
 

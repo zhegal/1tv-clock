@@ -53,7 +53,14 @@ export class VideoLoop {
         const index = (first + step) % segments.length;
         if (index === 0 && step > 0) offset = LOOP;
         const segment = segments[index];
-        this.chunks[index + 1] ??= await this.readRange(segment.start, segment.end);
+        if (!this.chunks[index + 1]) {
+          // Keep the first fragment small, then fetch up to ten seconds per
+          // request. Latency should not consume a two-second buffer repeatedly.
+          const last = step === 0 ? index : Math.min(index + 4, segments.length - 1, first > index ? first - 1 : segments.length - 1);
+          const bytes = await this.readRange(segment.start, segments[last].end);
+          if (generation !== this.generation) return;
+          for (let i = index; i <= last; i++) this.chunks[i + 1] = bytes.subarray(segments[i].start - segment.start, segments[i].end - segment.start);
+        }
         if (generation !== this.generation) return;
         this.buffer.timestampOffset = offset;
         await this.update(() => this.buffer.appendBuffer(this.chunks[index + 1]));

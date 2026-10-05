@@ -33,13 +33,14 @@ async function exerciseRuntime(query, expectedProfile, injectFailure = false, sl
   document.getElementById=id=>videos.find(el=>el.id===id)||(id==='hands'?canvas:elements[id]);document.createElement=()=>new Element();
   const manifest=JSON.parse(await readFile(new URL('../public/assets/manifest.json',import.meta.url)));
   globalThis.window=window;globalThis.document=document;globalThis.location={search:query};
-  let releaseImage;
-  globalThis.Image=class{decode(){if(slowImage&&!releaseImage)return new Promise(resolve=>{releaseImage=resolve;});return Promise.resolve();}};
+  let releaseImage, releaseBackground;
+  const backgroundFile=manifest.hands.hour[(statesAt(wall).hour+3)%240].file;
+  globalThis.Image=class{decode(){if(slowImage&&!releaseImage)return new Promise(resolve=>{releaseImage=resolve;});if(query.includes('background-test=1')&&this.src.endsWith(backgroundFile)&&!releaseBackground)return new Promise(resolve=>{releaseBackground=resolve;});return Promise.resolve();}};
   const media=JSON.parse(await readFile(new URL('../public/assets/media-manifest.json',import.meta.url)));
   globalThis.fetch=async url=>({ok:true,json:async()=>String(url).endsWith('media-manifest.json')?media:manifest});
   globalThis.setTimeout=(fn,delay)=>{const id=++timerId;timers.set(id,{fn,delay});return id;};globalThis.clearTimeout=id=>timers.delete(id);
   globalThis.performance={now:()=>mono};Date.now=()=>wall;
-  const drain=async()=>{for(let i=0;i<600;i++)await Promise.resolve();};
+  const drain=async()=>{for(let i=0;i<4000;i++)await Promise.resolve();};
   const tick=()=>{const scheduled=[...timers].filter(([,t])=>t.delay<=1001&&t.delay!==150);assert.equal(scheduled.length,1);const [id,t]=scheduled[0];timers.delete(id);t.fn();};
   try {
     await import(`../public/clock.js?runtime-test-${encodeURIComponent(query)}`);await drain();
@@ -49,6 +50,15 @@ async function exerciseRuntime(query, expectedProfile, injectFailure = false, sl
     present(video);await drain();
     if(slowImage){assert.equal(elements.loader.hidden,false,'video cannot reveal partly loaded hands');wall+=1500;mono+=1500;video.currentTime+=1.5;releaseImage();await drain();assert.equal(elements.loader.hidden,false,'old presented frame cannot reveal unsynchronized content');present(video);await drain();}
     assert.equal(elements.loader.hidden,true,'complete clock is revealed together');
+    if(query.includes('background-test=1')){
+      tick();
+      const data=JSON.parse(document.body.children[0].children.at(-1).textContent);
+      assert.equal(data.startupReady,true);assert.ok(data.decodedStates<540,'distant state does not delay startup');
+      mono+=60000;wall+=60000;video.currentTime=(video.currentTime+60)%60;tick();const state=statesAt(wall);
+      assert.ok(draws.at(-1).endsWith(`sec-${String(state.second).padStart(3,'0')}.png`));
+      assert.ok(draws.at(-2).endsWith(`min-${String(state.minute).padStart(3,'0')}.png`));
+      releaseBackground();await drain();
+    }
     if(expectedProfile!=='low'){
       let pending=videos.find(el=>el!==video);
       if(injectFailure){pending.error={code:4};pending.dispatchEvent(new Event('error'));await drain();mono+=100;wall+=100;video.currentTime+=.1;tick();await drain();pending=videos.find(el=>el!==video);}
@@ -91,3 +101,4 @@ for (const [query,profile] of [['?audio=unknown','high'],['?audio=day&quality=hi
 test('late play rejection from failed source cannot poison the new video profile',()=>exerciseRuntime('?quality=high&debug=1','medium',true));
 test('startup waits for delayed hand decoding and a fresh synchronized video frame',()=>exerciseRuntime('?quality=high&debug=1&slow-test=1','high',false,true));
 test('blocked mobile autoplay keeps the loader visible until its start button is used',()=>exerciseRuntime('?quality=low&debug=1&blocked-test=1','low'));
+test('distant hand states load after startup without freezing the next minute',()=>exerciseRuntime('?quality=low&debug=1&background-test=1','low'));

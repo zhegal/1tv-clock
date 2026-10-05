@@ -2,7 +2,7 @@ import { statesAt, phaseAt, phaseError, videoCorrection, ClockMonitor, modulo } 
 import { LoopAudio } from './audio.js';
 import { VideoLoop, VideoUpgrade } from './video.js';
 import { ClockPresentation } from './presentation.js';
-import { parseQuality, chooseQuality, assetURL, videoCandidates, audioCandidates, bufferedAhead } from './media.js';
+import { parseQuality, chooseQuality, assetURL, videoCandidates, audioCandidates, bufferedAhead, handPreloadPlan } from './media.js';
 
 const query = new URLSearchParams(location.search);
 const debug = query.get('debug') === '1';
@@ -18,6 +18,8 @@ const wallNow = () => Date.now();
 const monitor = new ClockMonitor(wallNow(), performance.now());
 const events = new AbortController();
 const images = new Map();
+const imagePromises = new Map();
+let startupEntries = [];
 let media, mediaLoading = false, mediaAttempts = 0, nextMedia = 0, mediaError = '';
 let profiles = [], profileIndex = -1, selectedVideo = null, videoFallbacks = 0, videoFallbackReason = '';
 let selectionHints = {};
@@ -49,8 +51,11 @@ function updateStartup() {
     : videoProgressed;
   const videoReady = videoInitialized && video.readyState >= 3 && !video.paused && !video.seeking && frameReady && bufferedAhead(video) >= 1.5 && Math.abs(phaseError(video.currentTime, phaseAt(wallNow()))) < 0.12;
   const audioReady = !!audio.buffer || audio.status === 'unavailable' || audio.status === 'load-error';
-  presentation.update(decoded, 540, videoReady, audioReady, videoAutoplayBlocked, !!(assetError || mediaError || videoError));
-  if (decoded === 540 && videoReady && audioReady && !document.hidden) {
+  const prepared = startupEntries.filter(entry => images.has(entry.file)).length;
+  const current = manifest && statesAt(wallNow());
+  const handsReady = current && [manifest.hands.hour[current.hour], manifest.hands.min[current.minute], manifest.hands.sec[current.second]].every(entry => images.has(entry.file));
+  presentation.update(prepared, startupEntries.length || 1, videoReady, audioReady, videoAutoplayBlocked, !!(assetError || mediaError || videoError));
+  if (startupEntries.length && prepared === startupEntries.length && handsReady && videoReady && audioReady && !document.hidden) {
     paint(); presentation.reveal(); audio.enabled = true; audio.sync(true); maybeUpgrade();
   }
 }
@@ -116,8 +121,13 @@ async function loadMedia() {
   } finally { clearTimeout(timeout); mediaLoading = false; if (debug) updateDebug(); }
 }
 
-async function imageFor(entry) {
+function imageFor(entry) {
   if (images.has(entry.file)) return;
+  if (imagePromises.has(entry.file)) return imagePromises.get(entry.file);
+  const promise = decodeImage(entry).finally(() => imagePromises.delete(entry.file));
+  imagePromises.set(entry.file, promise); return promise;
+}
+async function decodeImage(entry) {
   const image = new Image(); image.decoding = 'async'; image.src = assetURL(entry.file);
   const timeout = new Promise((_, reject) => { image._timer = setTimeout(() => reject(new Error(`PNG timeout: ${entry.file}`)), 15000); });
   try {
@@ -126,6 +136,21 @@ async function imageFor(entry) {
     if (stopped) return;
     images.set(entry.file, image); decoded++; paint(); updateStartup();
   } finally { clearTimeout(image._timer); image.onload = null; image.onerror = null; }
+}
+async function decodeEntries(entries, concurrency) {
+  let index = 0; const failures = [];
+  await Promise.all(Array.from({ length: concurrency }, async () => {
+    while (index < entries.length && !stopped) {
+      try { await imageFor(entries[index++]); } catch (error) { failures.push(String(error)); }
+    }
+  }));
+  if (failures.length) throw new Error(failures[0]);
+}
+function ensureCurrentHands() {
+  if (!manifest || stopped) return;
+  const state = statesAt(wallNow());
+  const missing = [manifest.hands.hour[state.hour], manifest.hands.min[state.minute], manifest.hands.sec[state.second]].filter(entry => !images.has(entry.file));
+  if (missing.length) Promise.all(missing.map(imageFor)).then(() => { paint(); updateStartup(); }).catch(error => { assetError = String(error); });
 }
 async function loadAssets() {
   if (loading || stopped) return;
@@ -139,18 +164,12 @@ async function loadAssets() {
         manifest = await response.json();
       } finally { clearTimeout(timeout); }
     }
-    const state = statesAt(wallNow());
-    // Decode current states first; each frame is painted only when all three
-    // are ready. Then preload every remaining state with bounded concurrency.
-    await Promise.all(['hour', 'min', 'sec'].map(kind => imageFor(manifest.hands[kind][state[{ hour: 'hour', min: 'minute', sec: 'second' }[kind]]])));
-    const entries = Object.values(manifest.hands).flat().filter(entry => !images.has(entry.file));
-    let index = 0; const failures = [];
-    await Promise.all(Array.from({ length: 6 }, async () => {
-      while (index < entries.length && !stopped) {
-        const entry = entries[index++]; try { await imageFor(entry); } catch (error) { failures.push(String(error)); }
-      }
-    }));
-    if (failures.length) throw new Error(failures[0]);
+    const plan = handPreloadPlan(manifest, wallNow());
+    if (!presentation.shown) startupEntries = plan.initial;
+    await decodeEntries(plan.initial, 4);
+    // Yield network and decoding capacity to the playing video and any state
+    // demanded by a system-clock change.
+    await decodeEntries(plan.remaining, 2);
     assetError = ''; assetAttempts = 0;
   } catch (error) {
     assetError = String(error); nextAssets = performance.now() + Math.min(60000, 1000 * 2 ** Math.min(assetAttempts, 6));
@@ -262,13 +281,13 @@ function syncVideo(force = false) {
 }
 function recover() {
   if (stopped || document.hidden) return;
-  lastPresented = performance.now(); progressMono = lastPresented; stallReported = false; paint(); syncVideo(true); audio.resume(false); audio.sync(true);
+  lastPresented = performance.now(); progressMono = lastPresented; stallReported = false; ensureCurrentHands(); paint(); syncVideo(true); audio.resume(false); audio.sync(true);
   lastCheck = performance.now(); schedule();
 }
 function tick() {
   if (stopped) return;
   const wall = wallNow(), mono = performance.now(); const jumped = monitor.sample(wall, mono);
-  paint();
+  ensureCurrentHands(); paint();
   if (!document.hidden && (jumped || mono - lastCheck >= 1000)) {
     if (jumped) { lastPresented = mono; progressMono = mono; stallReported = false; }
     syncVideo(jumped); audio.sync(jumped); lastCheck = mono;

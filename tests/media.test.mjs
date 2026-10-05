@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { parseQuality, chooseQuality, videoCandidates, audioCandidates, assetURL } from '../public/media.js';
+import { parseQuality, chooseQuality, videoCandidates, audioCandidates, assetURL, handPreloadPlan } from '../public/media.js';
 import { statesAt, phaseAt } from '../public/time.js';
 import { buildPages } from '../scripts/build-pages.mjs';
 import { readFile, mkdtemp, cp, rm, readdir } from 'node:fs/promises';
@@ -44,6 +44,18 @@ test('day/night candidate order and quality leave clock state and phase independ
 test('dynamic assets resolve within a project subpath', () => {
   assert.equal(assetURL('night.ogg','https://example.github.io/channel-one-clock/media.js'),'https://example.github.io/channel-one-clock/assets/night.ogg');
   assert.equal(assetURL('hands/hour-001.png','https://example.github.io/channel-one-clock/media.js'),'https://example.github.io/channel-one-clock/assets/hands/hour-001.png');
+});
+
+test('minimal hand startup covers minute/hour rollover and prioritizes the rest by use', async () => {
+  const hands = JSON.parse(await readFile(new URL('../public/assets/manifest.json', import.meta.url)));
+  const wall = new Date(2026,9,5,8,59,59,990).getTime(), plan = handPreloadPlan(hands, wall);
+  const initial = new Set(plan.initial.map(entry => entry.file));
+  assert.ok(initial.size < 80); assert.equal(hands.hands.sec.filter(entry => initial.has(entry.file)).length, 60);
+  for(let second=0;second<=120;second++) {
+    const state=statesAt(wall+second*1000);
+    assert.ok(initial.has(hands.hands.hour[state.hour].file));assert.ok(initial.has(hands.hands.min[state.minute].file));
+  }
+  assert.equal(new Set([...plan.initial,...plan.remaining].map(entry=>entry.file)).size,540);
 });
 
 test('Pages build copies the complete static product without changing manifests', async () => {
